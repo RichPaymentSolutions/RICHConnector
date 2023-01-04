@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RICH Connector", "CloverConnector\RICH Connector.csproj", "{10ACD59E-6538-40EB-AEA8-D9D49A6630BA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "RICH Setup", "RICH Setup\RICH Setup.vdproj", "{E45EDFA5-7323-48F0-A1DA-278EBBBA3FB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10ACD59E-6538-40EB-AEA8-D9D49A6630BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10ACD59E-6538-40EB-AEA8-D9D49A6630BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10ACD59E-6538-40EB-AEA8-D9D49A6630BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10ACD59E-6538-40EB-AEA8-D9D49A6630BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E45EDFA5-7323-48F0-A1DA-278EBBBA3FB6}.Debug|Any CPU.ActiveCfg = Debug
+		{E45EDFA5-7323-48F0-A1DA-278EBBBA3FB6}.Release|Any CPU.ActiveCfg = Release
+		{E45EDFA5-7323-48F0-A1DA-278EBBBA3FB6}.Release|Any CPU.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E61FC41-FFB9-471E-B7CD-E1852A6B8561}
+	EndGlobalSection
+EndGlobal

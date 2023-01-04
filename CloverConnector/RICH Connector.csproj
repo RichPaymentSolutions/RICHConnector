@@ -1,0 +1,79 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+	<UseWindowsForms>true</UseWindowsForms>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+	<StartupObject>Connector.App</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="rich.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Clover\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+	  <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+	  <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2" />
+	  <PackageReference Include="Microsoft.AspNetCore.Routing.Abstractions" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Core" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="2.2.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.6" />
+	  <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="rich.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resource1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resource1.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\rich.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\rich.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
