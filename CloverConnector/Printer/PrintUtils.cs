@@ -147,6 +147,8 @@ namespace RICH_Connector.Printer
             html = BindingTicket(html, receipt);
 
             var converter = new HtmlConverter() { };
+            //var htmlToPdf = new IronPdf.HtmlToPdf();
+            //IronPdf.PdfDocument pdfDocument = htmlToPdf.RenderHtmlAsPdf(html);
 
             var bytes = converter.FromHtmlString(html, width: int.Parse(pageWidth));
             File.WriteAllBytes(fileName, bytes);

@@ -101,6 +101,16 @@
                     "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.CoreRuntime.3.1.x64"
+                    {
+                    "Name" = "8:.NET Core Runtime 3.1.28 (x64)"
+                    "ProductCode" = "8:Microsoft.NetCore.CoreRuntime.3.1.x64"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.3.1.x64"
+                    {
+                    "Name" = "8:.NET Desktop Runtime 3.1.28 (x64)"
+                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.3.1.x64"
+                    }
                 }
             }
         }
@@ -241,15 +251,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:RICH Connector"
-        "ProductCode" = "8:{FF5BD3C4-C117-40DE-8F29-6000E8775B94}"
-        "PackageCode" = "8:{EF522C3E-8E78-4447-83D6-9231138429FE}"
+        "ProductCode" = "8:{06A9FBCD-DA02-419C-B138-737896A6CCC1}"
+        "PackageCode" = "8:{7FF3800C-4B9A-4CCD-9F68-A6B3746073A5}"
         "UpgradeCode" = "8:{0E1CA5DF-58F3-431D-B81B-66ACCC8F65F8}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.4"
+        "ProductVersion" = "8:1.0.5"
         "Manufacturer" = "8:RICH"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
