@@ -1,4 +1,5 @@
 ﻿using RICH_Connector.API;
+using RICH_Connector.Clover;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -60,6 +61,7 @@ namespace Connector
         protected override void OnExit(ExitEventArgs e)
         {
             this.notifyIcon.Dispose();
+            CloverClient.Instance.Disconnect();
             base.OnExit(e);
         }
 

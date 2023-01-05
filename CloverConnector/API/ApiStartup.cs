@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Internal;
 using Newtonsoft.Json.Serialization;
-using RICH_Connector.API.Filter;
+using RICH_Connector.API.Filter; 
 
 namespace RICH_Connector.API
 {
@@ -29,6 +29,7 @@ namespace RICH_Connector.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddMvcCore((options) =>
             {
                 options.Filters.Add<ExceptionFilter>();
@@ -36,25 +37,25 @@ namespace RICH_Connector.API
             .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
-
         public void Configure(IApplicationBuilder app)
         {
-            //app.Use((ctx, next) =>
-            //{
-            //    ctx.Response.Headers.Add("Access-Control-Allow-Origin", ctx.Request.Headers["Origin"]);
-            //    ctx.Response.Headers.Add("Access-Control-Allow-Methods", "*");
-            //    ctx.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
-            //    ctx.Response.Headers.Add("Access-Control-Allow-Headers", "*");
-            //    ctx.Response.Headers.Add("Access-Control-Expose-Headers", "*");
+            app.Use((ctx, next) =>
+            {
+                ctx.Response.Headers.Add("Access-Control-Allow-Origin", ctx.Request.Headers["Origin"]);
+                ctx.Response.Headers.Add("Access-Control-Allow-Methods", "*");
+                ctx.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+                ctx.Response.Headers.Add("Access-Control-Allow-Headers", "*");
+                ctx.Response.Headers.Add("Access-Control-Expose-Headers", "*");
 
-            //    if (ctx.Request.Method.ToLower() == "options")
-            //    {
-            //        ctx.Response.StatusCode = 204;
+                if (ctx.Request.Method.ToLower() == "options")
+                {
+                    ctx.Response.StatusCode = 204;
 
-            //        return Task.CompletedTask;
-            //    }
-            //    return next();
-            //});
+                    return Task.CompletedTask;
+                }
+                return next();
+            });
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseMvc();
 
         }

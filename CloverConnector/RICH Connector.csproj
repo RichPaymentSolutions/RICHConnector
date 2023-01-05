@@ -15,11 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Clover\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
+	  <PackageReference Include="Clover.RemotePayWindows" Version="4.0.6" />
+	  <PackageReference Include="CoreHtmlToImage" Version="1.0.6" />
 	  <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.6" />
 	  <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
