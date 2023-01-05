@@ -15,25 +15,25 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_3095D0BB59CF49DF96A154F89C57BD62"
+        "MsmKey" = "8:_030ED0A38D5047A29C630F1E78249113"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_356DF6E5764C44FA8B12D4801EE0D6EF"
+        "MsmKey" = "8:_263931BCE22447C29891686DB73D5CCE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6F4252C18F4C4F5B9AFABBCFD7D61094"
+        "MsmKey" = "8:_C9BDF3A7A6964CBB8AB63AAB64497D8A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A21AB8C774D34FF48C2F2477704C4114"
+        "MsmKey" = "8:_D75F29A3B43B4CF28D4DE4B3E8DAF38F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -134,10 +134,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3095D0BB59CF49DF96A154F89C57BD62"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_030ED0A38D5047A29C630F1E78249113"
             {
-            "SourcePath" = "8:..\\CloverConnector\\Resources\\rich.ico"
-            "TargetName" = "8:rich.ico"
+            "SourcePath" = "8:..\\CloverConnector\\bin\\Release\\netcoreapp3.1\\RICH Connector.exe"
+            "TargetName" = "8:RICH Connector.exe"
             "Tag" = "8:"
             "Folder" = "8:_142103278B6140178FB332AB44200F2D"
             "Condition" = "8:"
@@ -154,10 +154,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A21AB8C774D34FF48C2F2477704C4114"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D75F29A3B43B4CF28D4DE4B3E8DAF38F"
             {
-            "SourcePath" = "8:..\\CloverConnector\\bin\\Release\\net6.0-windows\\RICH Connector.exe"
-            "TargetName" = "8:RICH Connector.exe"
+            "SourcePath" = "8:..\\CloverConnector\\Resources\\rich.ico"
+            "TargetName" = "8:rich.ico"
             "Tag" = "8:"
             "Folder" = "8:_142103278B6140178FB332AB44200F2D"
             "Condition" = "8:"
@@ -240,26 +240,26 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Connector"
-        "ProductCode" = "8:{C08F3004-9A12-42A8-A865-23735E41F054}"
-        "PackageCode" = "8:{D2BC0185-5869-4258-B6B4-0E28A8BDE714}"
+        "ProductName" = "8:RICH Connector"
+        "ProductCode" = "8:{FF5BD3C4-C117-40DE-8F29-6000E8775B94}"
+        "PackageCode" = "8:{EF522C3E-8E78-4447-83D6-9231138429FE}"
         "UpgradeCode" = "8:{0E1CA5DF-58F3-431D-B81B-66ACCC8F65F8}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:TRUE"
+        "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.3"
+        "ProductVersion" = "8:1.0.4"
         "Manufacturer" = "8:RICH"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Connector"
+        "Title" = "8:RICH Connector"
         "Subject" = "8:"
         "ARPCONTACT" = "8:RICH Payment Solutions"
         "Keywords" = "8:RICH"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_3095D0BB59CF49DF96A154F89C57BD62"
+        "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -362,7 +362,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6BA52E8750EC4A11A7E7FE974BFF22D5"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_26EED68DABA149AA972FFAE6CD5C5E71"
             {
             "Name" = "8:RICH Connector"
             "Arguments" = "8:"
@@ -370,24 +370,24 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_A21AB8C774D34FF48C2F2477704C4114"
+            "Target" = "8:_030ED0A38D5047A29C630F1E78249113"
             "Folder" = "8:_60828F1AD6584833A589D72C56FD48D6"
             "WorkingFolder" = "8:_142103278B6140178FB332AB44200F2D"
-            "Icon" = "8:_3095D0BB59CF49DF96A154F89C57BD62"
+            "Icon" = "8:_D75F29A3B43B4CF28D4DE4B3E8DAF38F"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F5AF6CF0918948F2B6A36C03727602F4"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_918C64325D2547E0933662D1C8D59789"
             {
-            "Name" = "8:RICH Connector.exe"
+            "Name" = "8:RICH Connector"
             "Arguments" = "8:"
-            "Description" = "8:RICH Payment Solutions"
+            "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_A21AB8C774D34FF48C2F2477704C4114"
+            "Target" = "8:_030ED0A38D5047A29C630F1E78249113"
             "Folder" = "8:_0EA6A555C472451F957168BF2D2A6BE8"
             "WorkingFolder" = "8:_142103278B6140178FB332AB44200F2D"
-            "Icon" = "8:_3095D0BB59CF49DF96A154F89C57BD62"
+            "Icon" = "8:_D75F29A3B43B4CF28D4DE4B3E8DAF38F"
             "Feature" = "8:"
             }
         }
@@ -789,7 +789,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_356DF6E5764C44FA8B12D4801EE0D6EF"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_263931BCE22447C29891686DB73D5CCE"
             {
             "SourcePath" = "8:..\\CloverConnector\\obj\\Release\\netcoreapp3.1\\RICH Connector.dll"
             "TargetName" = "8:"
@@ -809,7 +809,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
+            "OutputConfiguration" = "8:Release|Any CPU"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{10ACD59E-6538-40EB-AEA8-D9D49A6630BA}"
             "ShowKeyOutput" = "11:TRUE"
@@ -817,7 +817,7 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6F4252C18F4C4F5B9AFABBCFD7D61094"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_C9BDF3A7A6964CBB8AB63AAB64497D8A"
             {
             "SourcePath" = "8:..\\CloverConnector\\obj\\Release\\netcoreapp3.1\\apphost.exe"
             "TargetName" = "8:"
@@ -837,7 +837,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
+            "OutputConfiguration" = "8:Release|Any CPU"
             "OutputGroupCanonicalName" = "8:PublishItems"
             "OutputProjectGuid" = "8:{10ACD59E-6538-40EB-AEA8-D9D49A6630BA}"
             "ShowKeyOutput" = "11:TRUE"
