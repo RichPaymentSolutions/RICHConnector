@@ -24,7 +24,7 @@ namespace RICH_Connector.API.Filter
             catch (Exception ex)
             {
                 //inspect the exception here
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
             }
         }
     }

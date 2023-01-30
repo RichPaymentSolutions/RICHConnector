@@ -2,12 +2,14 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>true</UseWindowsForms>
 	<ApplicationManifest>app.manifest</ApplicationManifest>
 	<StartupObject>Connector.App</StartupObject>
+	<Platforms>x64</Platforms>
+	<PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,13 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-
-  <ItemGroup>
 	  <PackageReference Include="Clover.RemotePayWindows" Version="4.0.6" />
 	  <PackageReference Include="CoreHtmlToImage" Version="1.0.6" />
-	  <PackageReference Include="IronPdf.Slim" Version="2022.12.11113" />
 	  <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.6" />
 	  <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
@@ -48,6 +45,8 @@
 	  <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="3.1.6" />
 	  <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.6" />
 	  <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.6" />
+	  <PackageReference Include="PDFtoPrinter" Version="1.4.4" />
+	  <PackageReference Include="Select.HtmlToPdf.NetCore" Version="22.2.0" />
   </ItemGroup>
 
   <ItemGroup>

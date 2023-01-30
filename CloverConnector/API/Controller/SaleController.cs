@@ -9,18 +9,20 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms.Design;
 
 namespace RICH_Connector.API
 {
     [Route("sales")]
+    //[ApiController]
     public class SaleController
     {
         [HttpPost]
         [Route("")]
-        public IActionResult Post([FromBody] SaleRequest saleRequest, CancellationToken cancellationToken)
+        public IActionResult Post([FromBody] SaleRequest saleRequest, CancellationToken cancellation)
         {
             CloverClient.Instance.CheckConnection();
-            var result = CloverClient.Instance.CreateSale(saleRequest, cancellationToken);
+            var result = CloverClient.Instance.CreateSale(saleRequest, cancellation);
             return new ObjectResult(new
             {
                 status = true,
@@ -32,12 +34,14 @@ namespace RICH_Connector.API
         }
 
         [HttpPost]
-        [Route("prints")]
-        public IActionResult Print([FromBody] Receipt receipt)
+        [Route("print")]
+        public IActionResult PrintAsync([FromBody] Receipt receipt)
         {
-            string fileName = PrintUtils.PrepareReceipt(receipt, "clover");
+            var html = new PrintUtils().PrepareReceiptAsync(receipt, "munbyn");
+            //string fileName = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH\\print.png";
+
             // CloverClient.Instance.CheckConnection();
-            CloverClient.Instance.Print(fileName);
+            //new PrinterClient().printHtmlFile(html);
             return new ObjectResult(new
             {
                 status = true,
@@ -57,6 +61,21 @@ namespace RICH_Connector.API
             {
                 status = true,
                 data = result
+            })
+            {
+                StatusCode = 200,
+            };
+        }
+
+        [HttpPost]
+        [Route("cash-drawer")]
+        public IActionResult OpenCashDrawer()
+        {
+            CloverClient.Instance.OpenCashDrawer("test");
+            return new ObjectResult(new
+            {
+                status = true,
+               
             })
             {
                 StatusCode = 200,

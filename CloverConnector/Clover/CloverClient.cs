@@ -136,7 +136,7 @@ namespace RICH_Connector.Clover
             pendingSale.AutoAcceptPaymentConfirmations = true;
             pendingSale.DisableDuplicateChecking = true;
             pendingSale.AllowOfflinePayment = false;
-
+            pendingSale.TippableAmount = request.TippableAmount;
 
             var retrieveDeviceStt = new RetrieveDeviceStatusRequest();
             cloverConnector.RetrieveDeviceStatus(retrieveDeviceStt);

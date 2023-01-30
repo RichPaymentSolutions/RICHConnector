@@ -8,7 +8,7 @@ using System.Text;
 namespace RICH_Connector.API.Controller
 {
     [Route("clover")]
-    [ApiController]
+    //[ApiController]
     public class CloverController
     {
         [HttpPost]

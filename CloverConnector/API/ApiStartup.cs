@@ -14,7 +14,8 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Internal;
 using Newtonsoft.Json.Serialization;
-using RICH_Connector.API.Filter; 
+using RICH_Connector.API.Filter;
+using Microsoft.AspNetCore.Http;
 
 namespace RICH_Connector.API
 {
@@ -53,6 +54,8 @@ namespace RICH_Connector.API
 
                     return Task.CompletedTask;
                 }
+
+                ctx.Request.EnableBuffering();
                 return next();
             });
             app.UseMiddleware<ExceptionMiddleware>();

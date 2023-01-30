@@ -15,6 +15,8 @@ namespace RICH_Connector.Printer
         public string TotalRevenue { get; set; }
         public List<PayrollStaffItem> PayrollStaffItems { get; set; }
         public string OwnerOnly { get; set; }
+        public string Owner { get; set; }
+        public string Technician { get; set; }
         public string TechnicianOnly { get; set; }
         public string OwnerAndTechnician { get; set; }
         public string CommissionAmount { get; set; }

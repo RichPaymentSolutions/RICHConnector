@@ -13,6 +13,6 @@ namespace RICH_Connector.API.Model
         public bool DisablePrinting { get; set; }
         public bool DisableReceiptSelection { get; set; }
         public String TipSettings { get; set; }
-        public int TipableAmount { get; set; }
+        public int TippableAmount { get; set; }
     }
 }
