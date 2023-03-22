@@ -3,12 +3,9 @@ using com.clover.remotepay.transport;
 using com.clover.sdk.v3.payments;
 using RICH_Connector.API.Model;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Text;
 using System.Threading;
-using static com.clover.remotepay.sdk.CloverDeviceEvent;
 using TipMode = com.clover.remotepay.sdk.TipMode;
 
 namespace RICH_Connector.Clover
@@ -84,12 +81,12 @@ namespace RICH_Connector.Clover
         {
             int count = 0;
             if (ccl == null)
-            {
+            {                        
                 throw CloverException.NotReadyYet;
             }
-            while (!ccl.deviceReady && count <= 4)
+            while (!ccl.deviceReady && count <= 1)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
                 count++;
             }
 
@@ -113,73 +110,123 @@ namespace RICH_Connector.Clover
         public Payment CreateSale(RICH_Connector.API.Model.SaleRequest request, CancellationToken? cancellationToken)
         {
             Console.WriteLine("New sale request");
+            ccl.paymentResponse = null;
             this.ClearCurrentPaymentResponse();
-            this.preValidationSaleRequest(request);
-            var pendingSale = new com.clover.remotepay.sdk.SaleRequest();
-            pendingSale.ExternalId = request.Id;
-            pendingSale.Amount = request.Amount;
-            pendingSale.TaxAmount = request.Tax;
-            pendingSale.TipAmount = request.Tip;
-            pendingSale.DisablePrinting = request.DisablePrinting;
-            pendingSale.DisableReceiptSelection = request.DisableReceiptSelection;
-
+            this.preValidationSaleRequest(request);       
+          
             if (request.TipSettings == "onTabletScreen")
             {
+                var pendingSale = new com.clover.remotepay.sdk.SaleRequest();
+                pendingSale.ExternalId = request.Id;
+                pendingSale.Amount = request.Amount;
+                pendingSale.TaxAmount = request.Tax;
+                pendingSale.TipAmount = request.Tip;
+                pendingSale.DisablePrinting = request.DisablePrinting;
+                pendingSale.DisableReceiptSelection = request.DisableReceiptSelection;
                 pendingSale.TipMode = TipMode.ON_SCREEN_BEFORE_PAYMENT;
+                pendingSale.AutoAcceptSignature = true;
+                pendingSale.AutoAcceptPaymentConfirmations = true;
+                pendingSale.DisableDuplicateChecking = true;
+                pendingSale.AllowOfflinePayment = false;
+                pendingSale.TippableAmount = request.TippableAmount;
+                var retrieveDeviceStt = new RetrieveDeviceStatusRequest();
+                cloverConnector.RetrieveDeviceStatus(retrieveDeviceStt);
+
+                cloverConnector.Sale(pendingSale);
+
+                int timeCount = 1;
+                while (ccl.paymentResponse == null && timeCount < WAITING_TIMEOUT && this.ccl.IsPaymentOnlineSuccess == null)
+                {
+                    if (cancellationToken.HasValue && isClientCancelRequest(cancellationToken.Value))
+                    {
+                        Console.WriteLine("Client cancel!");
+                        return null;
+                    }
+                    Thread.Sleep(1000);
+                    timeCount++;
+                }
+                var payment = ccl.paymentResponse;
+
+                if (payment == null)
+                {
+                    cloverConnector.ResetDevice();
+                    if (this.ccl.IsPaymentOnlineSuccess == false)
+                    {
+                        this.ccl.ResetState();
+                        throw CloverException.PaymentOnlineIsFailed;
+                    }
+                    throw CloverException.PaymentNotSuccess;
+                }
+
+                if (payment.Result == ResponseCode.CANCEL)
+                {
+                    cloverConnector.ResetDevice();
+                    throw CloverException.PaymentCancel;
+                }
+
+                if (!payment.Success)
+                {
+                    cloverConnector.ResetDevice();
+                    throw CloverException.PaymentNotSuccess;
+                }
+
+                return payment.Payment;
             }
             else
             {
-                pendingSale.TipMode = TipMode.TIP_PROVIDED;
-            }
+                var pendingSale = new com.clover.remotepay.sdk.AuthRequest();
+                pendingSale.ExternalId = request.Id;
+                pendingSale.Amount = request.Amount;
+                pendingSale.TaxAmount = request.Tax;             
+                pendingSale.DisablePrinting = request.DisablePrinting;
+                pendingSale.DisableReceiptSelection = request.DisableReceiptSelection;             
+                pendingSale.AutoAcceptSignature = true;
+                pendingSale.AutoAcceptPaymentConfirmations = true;
+                pendingSale.DisableDuplicateChecking = true;
+                pendingSale.AllowOfflinePayment = false;
+                pendingSale.TippableAmount = request.TippableAmount;
+                var retrieveDeviceStt = new RetrieveDeviceStatusRequest();
+                cloverConnector.RetrieveDeviceStatus(retrieveDeviceStt);
+                cloverConnector.Auth(pendingSale);
 
-            pendingSale.AutoAcceptSignature = true;
-            pendingSale.AutoAcceptPaymentConfirmations = true;
-            pendingSale.DisableDuplicateChecking = true;
-            pendingSale.AllowOfflinePayment = false;
-            pendingSale.TippableAmount = request.TippableAmount;
-
-            var retrieveDeviceStt = new RetrieveDeviceStatusRequest();
-            cloverConnector.RetrieveDeviceStatus(retrieveDeviceStt);
-
-            cloverConnector.Sale(pendingSale);
-
-            int timeCount = 1;
-            while (ccl.paymentResponse == null && timeCount < WAITING_TIMEOUT && this.ccl.IsPaymentOnlineSuccess == null)
-            {
-                if (cancellationToken.HasValue && isClientCancelRequest(cancellationToken.Value))
+                int timeCount = 1;
+                while (ccl.authResponse == null && timeCount < WAITING_TIMEOUT && this.ccl.IsPaymentOnlineSuccess == null)
                 {
-                    Console.WriteLine("Client cancel!");
-                    return null;
+                    if (cancellationToken.HasValue && isClientCancelRequest(cancellationToken.Value))
+                    {
+                        Console.WriteLine("Client cancel!");
+                        return null;
+                    }
+                    Thread.Sleep(1000);
+                    timeCount++;
                 }
-                Thread.Sleep(1000);
-                timeCount++;
-            }
-            var payment = ccl.paymentResponse;
+                var payment = ccl.authResponse;
 
-            if (payment == null)
-            {
-                cloverConnector.ResetDevice();
-                if (this.ccl.IsPaymentOnlineSuccess == false)
+                if (payment == null)
                 {
-                    this.ccl.ResetState();
-                    throw CloverException.PaymentOnlineIsFailed;
+                    cloverConnector.ResetDevice();
+                    if (this.ccl.IsPaymentOnlineSuccess == false)
+                    {
+                        this.ccl.ResetState();
+                        throw CloverException.PaymentOnlineIsFailed;
+                    }
+                    throw CloverException.PaymentNotSuccess;
                 }
-                throw CloverException.PaymentNotSuccess;
-            }
 
-            if (payment.Result == ResponseCode.CANCEL)
-            {
-                cloverConnector.ResetDevice();
-                throw CloverException.PaymentCancel;
-            }
+                if (payment.Result == ResponseCode.CANCEL)
+                {
+                    cloverConnector.ResetDevice();
+                    throw CloverException.PaymentCancel;
+                }
 
-            if (!payment.Success)
-            {
-                cloverConnector.ResetDevice();
-                throw CloverException.PaymentNotSuccess;
-            }
+                if (!payment.Success)
+                {
+                    cloverConnector.ResetDevice();
+                    throw CloverException.PaymentNotSuccess;
+                }
 
-            return payment.Payment;
+                return payment.Payment;
+            }      
         }
 
         public void ClearCurrentPaymentResponse()
@@ -290,6 +337,49 @@ namespace RICH_Connector.Clover
             this.cloverConnector.OpenCashDrawer(request);
 
         }
+
+        public void Ping()
+        {
+            RetrieveDeviceStatusRequest request = new RetrieveDeviceStatusRequest();
+            this.cloverConnector.RetrieveDeviceStatus(request);
+        }
+
+        public TipAdjustAuthResponse AddTip(AddTipRequest request)
+        {
+            // create a TipAdjustAuthRequest object with the payment ID and tip amount
+            TipAdjustAuthRequest tipAdjustAuthRequest = new TipAdjustAuthRequest();
+            tipAdjustAuthRequest.PaymentID = request.PaymentId;
+            tipAdjustAuthRequest.OrderID = request.OrderId;
+            tipAdjustAuthRequest.TipAmount = request.Amount;
+       
+            // call the TipAdjustAuth method to charge the tip
+            this.cloverConnector.TipAdjustAuth(tipAdjustAuthRequest);
+            int timeCount = 1;
+            while (ccl.tipAdjustAuthResponse == null && timeCount < WAITING_TIMEOUT)
+            {
+                Thread.Sleep(1000);
+                timeCount++;
+            }
+            var response = ccl.tipAdjustAuthResponse;
+
+            if (response == null)
+            {
+                cloverConnector.ResetDevice();
+                throw CloverException.RefundPaymentNotSuccess;
+            }
+
+            if (!response.Success)
+            {
+              
+                throw new CloverException(response.Message);
+            }
+
+            return response;
+
+
+
+        }
+   
     }
 
 }

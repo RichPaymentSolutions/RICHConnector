@@ -25,7 +25,8 @@ namespace RICH_Connector.Clover
         public PaymentResponse paymentResponse { get; set; }
         public RefundPaymentResponse refundPaymentResponse { get; set; }
         public VoidPaymentResponse voidPaymentResponse { get; set; }
-
+        public TipAdjustAuthResponse tipAdjustAuthResponse { get; set; }
+        public AuthResponse authResponse { get; set; }
         private Action<MerchantInfo> onDeviceReady;
         private Action onDeviceConnected;
         private Action onDeviceDisconnected;
@@ -134,5 +135,17 @@ namespace RICH_Connector.Clover
             this.lastDeviceEvent = null;
             this.IsPaymentOnlineSuccess = null;
         }
+        public override void OnTipAdjustAuthResponse(TipAdjustAuthResponse response)
+        {
+            base.OnTipAdjustAuthResponse(response);
+            this.tipAdjustAuthResponse = response;
+        }
+
+        public override void OnAuthResponse(AuthResponse response)
+        {
+            base.OnAuthResponse(response);
+            this.authResponse = response;
+        }
+
     }
 }

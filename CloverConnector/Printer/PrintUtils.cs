@@ -31,14 +31,23 @@ namespace RICH_Connector.Printer
 <div class=""flex"">Receipt No:<strong>{receipt_no}</strong></div>
 <div class=""flex"">Date:<span>{created_date}</span></div>
 <div class=""flex"">Transaction No:<strong>{transaction_no}</strong></div>
+<div class=""flex"">Entry Method:<strong>{entry_method}</strong></div>
 </div>
 <div class=""hr"">
 </div>
 <div class=""subcontent"">
 <h6>Customer: {customer_name}</h6>
-<h6>{payment_method}</h6></div>
+<h6>{payment_method}</h6>
 <table>{ticket_items}</table>
-<div class=""hr""></div><table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr><tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr><tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>{tip}</div></td></tr><tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><strong>{total}</strong></td></tr></table><div class=""tip-line""</div></body></html>";
+<div class=""hr""></div><table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr>
+<tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr>
+<tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr
+><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>{tip}</div></td></tr>
+<tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><strong>{total}</strong></td></tr>
+{cash_paid}
+{change_due}
+</table
+><div class=""tip-line""</div></div></body></html>";
         public string receiptTemplateWithTip = @"<!DOCTYPE html><html><head>{style}</head><body>
 <h5 class=""text-center"">{business_name}</h5>
 <div class=""text-center"">{business_phone}</div>
@@ -54,25 +63,33 @@ namespace RICH_Connector.Printer
 <h6>{payment_method}</h6></div><table>{ticket_items}</table><div class=""hr""></div><table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr><tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr><tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr></table><br/><table><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>_________</div></td></tr></table><br/><table><tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><div>_________</div></td></tr></table><br/><br/><br/><br/><div>_______________________________________</div><div class=""text-center"">Signature</div><br/><div class=""text-center"">I agree to pay the above amount per the cardholder and/or merchant agreement</div></body></html>";
         public string ticketTemplate = @"<tr><td colspan=""3""><span class=""width-400"">{staff}</span></td></tr>";
         public string ticketItemTemplate = @"<tr><td width=""100%""><span class=""text"">{service}</span></td><td><span>{quantity}</span></td><td class=""text-right""><span class=""no-wrap"">&nbsp &nbsp &nbsp {price}</span></td></tr>";
-
+        //h5 14 - h6 13 - div 13
         public string munbynStyle = @"<style>
-            body{padding: 0px 0px;margin:0;width:270px;font-family:Arial;}
-            h5{margin:4px 0;font-size:14px}
-            h6{font-size:13px; margin:4px 0} 
-            table{width:80%; margin: 0 auto; border-collapse: collapse;}
-            div,span,strong, b{font-size:13px;}
-            .text-center{text-align:center}
+            body{padding: 0px 0px;margin:0;width:160px;font-family:Arial;}
+            h5{margin:4px 0;font-size:11px}
+            h6{font-size:10px; margin:11px 0} 
+            table{width:100%; margin: 0 auto; border-collapse: collapse;}
+            div,span,strong, b{font-size:9px;}
+            .text-center{text-align:center; width: 100%}
             .row{}
-            .width-400{width:270px;}
-            .hr{margin: 0 auto;overflow:hidden;width:80%;border:1px dashed #000000;}
+            .width-400{width:160px;}
+            .hr{margin: 0 auto;overflow:hidden;width:90%;border:1px dashed #000000;}
             .no-wrap{white-space: nowrap;}
             .content{width:100%;} 
             .line{border-top: 1px solid; padding-top: 10px} 
-            .subcontent{width:80%; margin: 0 auto;} 
+            .subcontent{width:90%; margin: 0 auto;} 
+            .subcontent90{width:90%; margin: 0 auto;} 
             .text-right{float:right; text-align:right}
             .leftBit{margin-left:-4px}
             .black-box{background:black; color:white}</style>";
-        public string payrollTemplate = @"<!DOCTYPE html><html><head>{style}</head><body><h5 class=""text-center"">Technicans Report</h5><h5 class=""text-center"">{business_name}</h5><div class=""text-center""><span>{start_date} - {end_date}</span></div><div class=""content""><table><tr class=""row""><td><h6>Name</h6></td><td><h6>Amount</h6></td><td><h6>Service#</h6></td></tr>{payroll_staffs}<tr class=""line""><td><strong class=""text"">Total</strong></td><td><strong>{total}</strong></td><td></td></tr></table><table></table></div><br/><h5 class=""text-center"">Technicans Gratuity Collected</h5><br/><div class=""content""><table><tr class=""row""><td><h6>Name</h6></td><td><h6>Amount</h6></td><td><h6>Gratuity#</h6></td></tr>{gratuity_staffs}</table></div></body></html>";
+        public string payrollTemplate = @"<!DOCTYPE html><html><head>{style}</head>
+<body>
+<div class=""subcontent""style={{}}>
+<h5 class=""text-center"">Technicans Report</h5>
+<h5 class=""text-center"">{business_name}</h5>
+<div class=""text-center""><span>{start_date} - {end_date}</span></div>
+</div>
+<div class=""subcontent80""><table><tr class=""row""><td><h6>Name</h6></td><td><h6>Amount</h6></td><td><h6>Service#</h6></td></tr>{payroll_staffs}<tr class=""line""><td><strong class=""text"">Total</strong></td><td><strong>{total}</strong></td><td></td></tr></table><table></table><br/><h5 class=""text-center"">Technicans Gratuity Collected</h5><br/><div class=""content""><table><tr class=""row""><td><h6>Name</h6></td><td><h6>Amount</h6></td><td><h6>Gratuity#</h6></td></tr>{gratuity_staffs}</table></div></div></body></html>";
         public string payrollItemsTemplate = @"<tr class=""row""><td><span>{staff_name}</span></td><td><span>{total}</span></td><td><span>{count}</span></td></tr>";
         public string payrollStaffTemplate = @"<!DOCTYPE html><html><head>{style}</head>
             <body>
@@ -84,17 +101,20 @@ namespace RICH_Connector.Printer
                     <br/>
                     <div>Ticket: {Ticket}</div>
                     <div>Service: ${Service}</div>
-                    <div>Gratuity: ${Gratuity}</div>
+                    <div>Gratuity: ${RawGratuity} - {TipChargePercent}% = ${Gratuity}</div>
                     <div>Total Revenue: ${TotalRevenue}</div>
+                    <br/>
                 </div>
-                <table>
-                    <tr>
-                        <td><h6>Day</h6></td>
-                        <td><h6>Service</h6></td>
-                        <td><h6>Tip</h6></td>
-                    </tr>
-                    {PayrollStaffItems}
-                </table>
+                <div class=""subcontent"">
+                    <table>
+                        <tr>
+                            <td><h6>Day</h6></td>
+                            <td><h6>Service</h6></td>
+                            <td><h6>Tip</h6></td>
+                        </tr>
+                        {PayrollStaffItems}
+                    </table>
+                </div>
                 <div class=""subcontent"">
                     <hr/>
                     <h6>Discounts</h6>
@@ -104,13 +124,14 @@ namespace RICH_Connector.Printer
                     <div>Owner Only (O) = ${OwnerOnly}</div>
                     <div>Technician Only (E) = ${TechnicianOnly}</div>
                     <br/>
-                    <h6>{Contracted}% = ${CommissionAmount}</h6>
-                    <div>#Tips: ${Tips}</div>
+           
+                    <h6>First ${HardSalary} or {Contracted}% = ${CommissionAmount}</h6>
+                    <div>#Tips: {Tips}</div>
                     <div>Total Tip: ${TotalTip}</div>
                     <br/>
                     <h6>Payroll:</h6>
-                    <div>Total Check Amount: ${TotalCheckAmount}</div>
-                    <div>Total Bonus Amount: ${TotalBonusAmount}</div>
+                    <div>Check: ${TotalCheckAmount}</div>
+                    <div> Cash: ${TotalBonusAmount}</div>
                 </div>
             </body></html>";
         public string payrollStaffItemTemplate = @"
@@ -183,11 +204,12 @@ namespace RICH_Connector.Printer
                 </div>
                
                 <table>
-                    {ticket_items}
+                    {ticket_items}                
                     <tr>
+                      
+                        <td><span><b>TOTAL</b></span></td>
                         <td><span></span></td>
-                        <td><span>TOTAL</span></td>
-                        <td><span>{total}</span></td>
+                        <td class=""text-right""><span class=""no-wrap"">&nbsp &nbsp &nbsp {total}</span></td>
                     </tr>
                 </table>
                 
@@ -203,9 +225,10 @@ namespace RICH_Connector.Printer
                 </div>
               
             </body>";
-        public string tmpReceiptItemsTemplate = @"
+        public string tmpReceiptItemsTemplate = @"<tr><td colspan=""3""><span class=""width-400"">{staff}</span></td></tr>";
+        public string tmpReceiptItemTemplate = @"
         <tr>
-            <td><span>{no} &nbsp</span></td>
+            
             <td><span>{service}</span></td>
             <td><span>{price}</span></td>
         </tr>";
@@ -251,8 +274,8 @@ namespace RICH_Connector.Printer
                             <td><span>${TotalDiscount}</span></td>
                         </tr>
                         <tr>
-                            <td><span>Total Redeem</span></td>
-                            <td><span>${TotalRedeem}</span></td>
+                            <td><span>Total Supply Fee</span></td>
+                            <td><span>${TotalSupplyFee}</span></td>
                         </tr>
                         <tr>
                             <td><span>Total Cash Discount</span></td>
@@ -270,8 +293,38 @@ namespace RICH_Connector.Printer
                     </table>
                 </body>
             </html>";
+        public string transactionTemplate = @"<!DOCTYPE html><html>
+        <head>{style}</head>
+        <body>
+<br />
+<br />
+        <h5 class=""text-center"">{business_name}</h5>
+        <div class=""text-center"">{business_phone}</div><br>
+        <div class=""subcontent"">
+            <div class=""flex"">Receipt No:<strong>{receipt_no}</strong></div>
+            <div class=""flex"">Date:<span>{created_date}</span></div>
+            <div class=""flex"">Transaction No:<strong>{transaction_no}</strong></div>
+        </div>
+        <div class=""hr"">
+        </div>
+        <div class=""subcontent"">
+            <h6>Customer: {customer_name}</h6>
+            <h6>{payment_method}</h6>
+        </div>
+        <div class=""hr""></div>
+        
+         <table>
+        <tr><td><span class=""text"">Sub Total</span></td><td class=""text-right""><div>{sub_total}</div></td></tr>
+        <tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>{tip}</div></td></tr>
+        <tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><strong>{total}</strong></td></tr>
+        </table>
+        
+        <div class=""tip-line""</div><br /><br /></body></html>";
+
         public string fileName = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH\\print.png";
         public string folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH";
+
+        //Ticket
         public string PrepareReceiptAsync(Receipt receipt, String printer)
         {
             string template = receiptTemplate;
@@ -285,13 +338,13 @@ namespace RICH_Connector.Printer
             {
                 template = tmpReceiptTemplate;       
             }
-            string pageWidth = receipt.PageWidth == null || receipt.PageWidth.Equals("") ? "400" : receipt.PageWidth;
+            string pageWidth = "50";
             string html = BuildReceipt(template, pageWidth, printer);
             html = BindingGeneralInfo(html, receipt);
             html = BindingTicket(html, receipt);
 
             var converter = new CoreHtmlToImage.HtmlConverter() { };
-            var bytes = converter.FromHtmlString(html, 270);
+            var bytes = converter.FromHtmlString(html, 50);
             File.WriteAllBytes(fileName, bytes);
 
        
@@ -309,7 +362,7 @@ namespace RICH_Connector.Printer
         {
             if (receipt == null) return html;
 
-            return html
+            html = html
                 .Replace("{business_name}", receipt.BusinessName)
                 .Replace("{business_address}", receipt.BusinessAddress)
                 .Replace("{business_state}", receipt.BusinessState)
@@ -319,11 +372,25 @@ namespace RICH_Connector.Printer
                 .Replace("{customer_name}", receipt.CustomerName)
                 .Replace("{payment_method}", receipt.PaymentMethod)
                 .Replace("{transaction_no}", receipt.TransactionNo)
+                .Replace("{entry_method}", receipt.EntryMethod)
                 .Replace("{discount}", "$" + receipt.Discount)
                 .Replace("{sub_total}", "$" + receipt.SubTotal)
                 .Replace("{taxes}", "$" + receipt.Tax)
                 .Replace("{tip}", "$" + receipt.Tip)
                 .Replace("{total}", "$" + receipt.Total);
+            if (receipt.PaymentMethod == "Cash")
+            {
+                html = html.Replace("{cash_paid}", @"<tr><td><span class=""text"">Cash Paid</span></td><td class=""text-right""><div>{a}</div></td></tr>")
+                    .Replace("{a}", "$" + receipt.CashPaid)
+                    .Replace("{change_due}", @"<tr><td><span class=""text"">Change Due</span></td><td class=""text-right""><div>{a}</div></td></tr>")
+                    .Replace("{a}", "$" + receipt.ChangeDue);
+            } else
+            {
+                html = html.Replace("{cash_paid}", "")
+                            .Replace("{change_due}", "");
+            }
+
+            return html;
         }
 
         string BindingTicket(string html, Receipt receipt)
@@ -331,18 +398,21 @@ namespace RICH_Connector.Printer
             if (receipt == null) return html;
 
             string output = "";
-            int count = 1;
+          
             if (receipt.IsTmp) {
                 List<ReceiptStaff> staffs = receipt.Staffs;
                 foreach (ReceiptStaff receiptStaff in staffs)
                 {
+                    output += ticketTemplate.Replace("{staff}", "<b>Staff: " +receiptStaff.StaffName + "</b>");
+
                     foreach (ReceiptItem item in receiptStaff.Items)
                     {
-                        output += tmpReceiptItemsTemplate
-                            .Replace("{no}", count++.ToString())
+                        output += ticketItemTemplate
                             .Replace("{service}", item.ServiceName)
                             .Replace("{quantity}", "x" + item.ServiceQuantity)
                             .Replace("{price}", "$" + item.ServicePrice);
+
+                     
                     }
                 }
             }
@@ -374,6 +444,7 @@ namespace RICH_Connector.Printer
             return html.Replace("{ticket_items}", output);
         }
 
+        //Payroll
         string BindingPayroll(string html, Payroll payroll)
         {
             if (payroll == null) return html;
@@ -408,12 +479,12 @@ namespace RICH_Connector.Printer
         {
             string template = payrollTemplate;
             System.IO.Directory.CreateDirectory(folder);
-            string pageWidth = payroll.PageWidth == null || payroll.PageWidth.Equals("") ? "400" : payroll.PageWidth;
+            string pageWidth = payroll.PageWidth == null || payroll.PageWidth.Equals("") ? "400" : "160";
             string html = BuildPayroll(template, pageWidth, printer);
             html = BindingPayroll(html, payroll);
 
             var converter = new CoreHtmlToImage.HtmlConverter();
-            var bytes = converter.FromHtmlString(html, 270);
+            var bytes = converter.FromHtmlString(html, 160);
            
             File.WriteAllBytes(fileName, bytes);
             
@@ -439,6 +510,8 @@ namespace RICH_Connector.Printer
                         .Replace("{Ticket}", payroll.Ticket)
                         .Replace("{Service}", String.Format("{0:N2}", float.Parse(payroll.Service)))
                         .Replace("{TotalRevenue}", String.Format("{0:N2}", float.Parse(payroll.TotalRevenue)))
+                        .Replace("{RawGratuity}", String.Format("{0:N2}", float.Parse(payroll.RawGratuity)))
+                        .Replace("{TipChargePercent}", payroll.TipChargePercent)
                         .Replace("{Gratuity}", String.Format("{0:N2}", float.Parse(payroll.Gratuity)))
                         .Replace("{CommissionAmount}", String.Format("{0:N2}", float.Parse(payroll.CommissionAmount)))
                         .Replace("{OwnerAndTechnician}", String.Format("{0:N2}", float.Parse(payroll.OwnerAndTechnician)))
@@ -446,12 +519,12 @@ namespace RICH_Connector.Printer
                         .Replace("{Technician}", String.Format("{0:N2}", float.Parse(payroll.Technician)))
                         .Replace("{OwnerOnly}", String.Format("{0:N2}", float.Parse(payroll.OwnerOnly)))
                         .Replace("{TechnicianOnly}", String.Format("{0:N2}", float.Parse(payroll.TechnicianOnly)))
+                        .Replace("{HardSalary}", String.Format("{0:N2}", float.Parse(payroll.HardSalary)))
                         .Replace("{PayrollStaffItems}", output)
-                        .Replace("{TipsCollected}", payroll.TipsCollected)
                         .Replace("{Tips}", payroll.Tips)
                         .Replace("{TotalTip}", String.Format("{0:N2}", float.Parse(payroll.TotalTip)))
                         .Replace("{TotalCheckAmount}", String.Format("{0:N2}", float.Parse(payroll.TotalCheckAmount)))
-                        .Replace("{TotalBonusAmount}", String.Format("{0:N2}", float.Parse(payroll.TotalBonusAmount)));
+                        .Replace("{TotalBonusAmount}", String.Format("{0:N2}", float.Parse(payroll.TotalCashAmount)));
         }
 
         public string PreparePayrollStaff(PayrollStaff payroll, String printer)
@@ -465,12 +538,13 @@ namespace RICH_Connector.Printer
 
             var converter = new CoreHtmlToImage.HtmlConverter() { };
 
-            var bytes = converter.FromHtmlString(html, 270);
+            var bytes = converter.FromHtmlString(html, 160);
             File.WriteAllBytes(fileName, bytes);
            
             return html;
         }
 
+        //Total Report
         string BindingTotalReport(string html, Report report)
         {
             if (report == null) return html;
@@ -500,7 +574,7 @@ namespace RICH_Connector.Printer
 
             var converter = new CoreHtmlToImage.HtmlConverter() { };
 
-            var bytes = converter.FromHtmlString(html, 270);
+            var bytes = converter.FromHtmlString(html, 160);
             //var bytes = PdfSharpConvert(html);
 
             File.WriteAllBytes(fileName, bytes);
@@ -508,6 +582,7 @@ namespace RICH_Connector.Printer
             return html;
         }
 
+        //Income Report
         string BindingIncomeReport(string html, Income report)
         {
             if (report == null) return html;
@@ -520,7 +595,7 @@ namespace RICH_Connector.Printer
                         .Replace("{Tax}", String.Format("{0:N2}", float.Parse(report.Tax)))
                         .Replace("{TotalGratuity}", String.Format("{0:N2}", float.Parse(report.TotalGratuity)))
                         .Replace("{TotalDiscount}", String.Format("{0:N2}", float.Parse(report.TotalDiscount)))
-                        .Replace("{TotalRedeem}", String.Format("{0:N2}", float.Parse(report.TotalRedeem)))
+                        .Replace("{TotalSupplyFee}", String.Format("{0:N2}", float.Parse(report.SupplyFee)))
                         .Replace("{TotalCashDiscount}", String.Format("{0:N2}", float.Parse(report.TotalCashDiscount)))
                         .Replace("{TransactionFee}", String.Format("{0:N2}", float.Parse(report.TransactionFee)))
                         .Replace("{Total}", String.Format("{0:N2}", float.Parse(report.Total)))
@@ -539,7 +614,7 @@ namespace RICH_Connector.Printer
 
             var converter = new CoreHtmlToImage.HtmlConverter() { };
 
-            var bytes = converter.FromHtmlString(html, 270);
+            var bytes = converter.FromHtmlString(html, 160);
             //var bytes = PdfSharpConvert(html);
 
             File.WriteAllBytes(fileName, bytes);
@@ -554,5 +629,40 @@ namespace RICH_Connector.Printer
                 .Replace("{page_width}", pageWidth);
         }
 
+        //Transaction
+        string BindingTransaction(string html, Transaction transaction)
+        {
+            if (transaction == null) return html;
+
+            return html
+                .Replace("{business_name}", transaction.BusinessName)
+                .Replace("{business_address}", transaction.BusinessAddress)
+                .Replace("{business_state}", transaction.BusinessState)
+                .Replace("{business_phone}", transaction.BusinessPhone)
+                .Replace("{receipt_no}", transaction.ReceiptNo)
+                .Replace("{created_date}", transaction.CreatedDate)
+                .Replace("{customer_name}", transaction.CustomerName)
+                .Replace("{payment_method}", transaction.PaymentMethod)
+                .Replace("{transaction_no}", transaction.TransactionNo)             
+                .Replace("{tip}", "$" + transaction.Tip)
+                .Replace("{sub_total}", "$" + transaction.SubTotal)
+                .Replace("{total}", "$" + transaction.Total);
+        }
+
+        public string PrepareTransaction(Transaction transaction, String printer)
+        {
+            string template = transactionTemplate;
+            System.IO.Directory.CreateDirectory(folder);
+
+            string pageWidth = transaction.PageWidth == null || transaction.PageWidth.Equals("") ? "400" : "160";
+            string html = BuildPayroll(template, pageWidth, printer);
+            html = BindingTransaction(html, transaction);
+
+            var converter = new CoreHtmlToImage.HtmlConverter() { };
+            var bytes = converter.FromHtmlString(html, 160);
+           
+            File.WriteAllBytes(fileName, bytes);
+            return html;
+        }
     }
 }

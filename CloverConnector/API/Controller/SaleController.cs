@@ -41,7 +41,7 @@ namespace RICH_Connector.API
             //string fileName = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH\\print.png";
 
             // CloverClient.Instance.CheckConnection();
-            //new PrinterClient().printHtmlFile(html);
+            new PrinterClient().printHtmlFile(html);
             return new ObjectResult(new
             {
                 status = true,

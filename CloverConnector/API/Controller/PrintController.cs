@@ -36,6 +36,7 @@ namespace RICH_Connector.API
                 StatusCode = 200,
             };
         }
+        
         [HttpPost]
         [Route("payroll-staff")]
         public IActionResult PrintPayrolStaff([FromBody] PrintPayrollStaffRequest request)
@@ -55,6 +56,7 @@ namespace RICH_Connector.API
                 StatusCode = 200,
             };
         }
+        
         [HttpPost]
         [Route("ticket")]
         public IActionResult PrintTicket([FromBody] PrintTicketRequest request)
@@ -100,6 +102,26 @@ namespace RICH_Connector.API
         public IActionResult PrintIncomeReport([FromBody] PrintIncomeRequest request)
         {
             string html = new PrintUtils().PrepareIncomeReport(request.Income, "munbyn");
+
+            if (request.Printer == "munbyn")
+            {
+                new PrinterClient().printHtmlFile(html);
+            }
+            return new ObjectResult(new
+            {
+                status = true,
+
+            })
+            {
+                StatusCode = 200,
+            };
+        }
+
+        [HttpPost]
+        [Route("transaction")]
+        public IActionResult PrintTransaction([FromBody] PrintTransactionRequest request)
+        {
+            string html = new PrintUtils().PrepareTransaction(request.Transaction, "munbyn");
 
             if (request.Printer == "munbyn")
             {

@@ -12,6 +12,8 @@ namespace RICH_Connector.Printer
         public string Ticket { get; set; }
         public string Service { get; set; }
         public string Gratuity { get; set; }
+        public string RawGratuity { get; set; }
+        public string TipChargePercent { get; set; }
         public string TotalRevenue { get; set; }
         public List<PayrollStaffItem> PayrollStaffItems { get; set; }
         public string OwnerOnly { get; set; }
@@ -23,8 +25,9 @@ namespace RICH_Connector.Printer
         public string TipsCollected { get; set; }
         public string Tips { get; set; }
         public string TotalTip { get; set; }
+        public string HardSalary { get; set; }
         public string TotalCheckAmount { get; set; }
-        public string TotalBonusAmount { get; set; }
+        public string TotalCashAmount { get; set; }
         public PayrollStaff() { }
     }
 }

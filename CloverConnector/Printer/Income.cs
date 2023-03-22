@@ -17,7 +17,7 @@ namespace RICH_Connector.Printer
         public string Tax { get; set; }
         public string TotalGratuity { get; set; }
         public string TotalDiscount { get; set; }
-        public string TotalRedeem { get; set; }
+        public string SupplyFee { get; set; }
         public string TotalCashDiscount { get; set; }
         public string TransactionFee { get; set; }
         public string Total { get; set; }

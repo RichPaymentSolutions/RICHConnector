@@ -24,5 +24,22 @@ namespace RICH_Connector.API.Controller
                 StatusCode = 200,
             };
         }
+
+        [HttpPost]
+        [Route("transactions/add-tip")]
+        public IActionResult TransactionAddTip([FromBody] AddTipRequest addTipRequest)
+        {
+            CloverClient.Instance.CheckConnection();
+            var result = CloverClient.Instance.AddTip(addTipRequest);
+            return new ObjectResult(new
+            {
+                status = true,
+                data = result
+            })
+            {
+                StatusCode = 200,
+            };
+        }
+
     }
 }
