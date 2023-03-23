@@ -33,13 +33,15 @@ namespace RICH_Connector.Printer
 <div class=""flex"">Transaction No:<strong>{transaction_no}</strong></div>
 <div class=""flex"">Entry Method:<strong>{entry_method}</strong></div>
 </div>
-<div class=""hr"">
-</div>
+<br/>
+<div class=""hr""></div>
 <div class=""subcontent"">
 <h6>Customer: {customer_name}</h6>
 <h6>{payment_method}</h6>
 <table>{ticket_items}</table>
-<div class=""hr""></div><table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr>
+<br/>
+<div class=""hr"">
+</div><br/><table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr>
 <tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr>
 <tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr
 ><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>{tip}</div></td></tr>
@@ -51,16 +53,16 @@ namespace RICH_Connector.Printer
         public string receiptTemplateWithTip = @"<!DOCTYPE html><html><head>{style}</head><body>
 <h5 class=""text-center"">{business_name}</h5>
 <div class=""text-center"">{business_phone}</div>
-<br>
 <div class=""subcontent"">
 <div>Receipt No:<strong>{receipt_no}</strong></div>
 <div>Date:<span>{created_date}</span></div>
 <div>Transaction No:<strong>{transaction_no}</strong></div></div>
+<br/>
 <div class=""hr"">
 </div>
 <div class=""subcontent"">
 <h6>Customer: {customer_name}</h6>
-<h6>{payment_method}</h6></div><table>{ticket_items}</table><div class=""hr""></div><table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr><tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr><tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr></table><br/><table><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>_________</div></td></tr></table><br/><table><tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><div>_________</div></td></tr></table><br/><br/><br/><br/><div>_______________________________________</div><div class=""text-center"">Signature</div><br/><div class=""text-center"">I agree to pay the above amount per the cardholder and/or merchant agreement</div></body></html>";
+<h6>{payment_method}</h6></div><table>{ticket_items}</table><br/><div class=""hr""></div><br/><table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr><tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr><tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr></table><br/><table><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>_________</div></td></tr></table><br/><table><tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><div>_________</div></td></tr></table><br/><br/><br/><br/><div>_______________________________________</div><div class=""text-center"">Signature</div><br/><div class=""text-center"">I agree to pay the above amount per the cardholder and/or merchant agreement</div></body></html>";
         public string ticketTemplate = @"<tr><td colspan=""3""><span class=""width-400"">{staff}</span></td></tr>";
         public string ticketItemTemplate = @"<tr><td width=""100%""><span class=""text"">{service}</span></td><td><span>{quantity}</span></td><td class=""text-right""><span class=""no-wrap"">&nbsp &nbsp &nbsp {price}</span></td></tr>";
         //h5 14 - h6 13 - div 13

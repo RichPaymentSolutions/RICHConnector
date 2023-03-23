@@ -110,6 +110,7 @@ namespace RICH_Connector.Clover
         public Payment CreateSale(RICH_Connector.API.Model.SaleRequest request, CancellationToken? cancellationToken)
         {
             Console.WriteLine("New sale request");
+            ccl.authResponse = null;
             ccl.paymentResponse = null;
             this.ClearCurrentPaymentResponse();
             this.preValidationSaleRequest(request);       
@@ -161,12 +162,14 @@ namespace RICH_Connector.Clover
                 if (payment.Result == ResponseCode.CANCEL)
                 {
                     cloverConnector.ResetDevice();
+                    this.ccl.ResetState();
                     throw CloverException.PaymentCancel;
                 }
 
                 if (!payment.Success)
                 {
                     cloverConnector.ResetDevice();
+                    this.ccl.ResetState();
                     throw CloverException.PaymentNotSuccess;
                 }
 
@@ -208,6 +211,7 @@ namespace RICH_Connector.Clover
                     if (this.ccl.IsPaymentOnlineSuccess == false)
                     {
                         this.ccl.ResetState();
+                        ccl.authResponse = null;
                         throw CloverException.PaymentOnlineIsFailed;
                     }
                     throw CloverException.PaymentNotSuccess;
@@ -216,12 +220,16 @@ namespace RICH_Connector.Clover
                 if (payment.Result == ResponseCode.CANCEL)
                 {
                     cloverConnector.ResetDevice();
+                    ccl.authResponse = null;
+                    this.ccl.ResetState();
                     throw CloverException.PaymentCancel;
                 }
 
                 if (!payment.Success)
                 {
                     cloverConnector.ResetDevice();
+                    ccl.authResponse = null;
+                    this.ccl.ResetState();
                     throw CloverException.PaymentNotSuccess;
                 }
 
@@ -365,19 +373,18 @@ namespace RICH_Connector.Clover
             if (response == null)
             {
                 cloverConnector.ResetDevice();
+                ccl.tipAdjustAuthResponse = null;
                 throw CloverException.RefundPaymentNotSuccess;
             }
 
             if (!response.Success)
             {
-              
+                ccl.tipAdjustAuthResponse = null;
                 throw new CloverException(response.Message);
             }
 
+            ccl.tipAdjustAuthResponse = null;
             return response;
-
-
-
         }
    
     }
