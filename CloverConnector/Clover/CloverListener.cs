@@ -27,6 +27,7 @@ namespace RICH_Connector.Clover
         public VoidPaymentResponse voidPaymentResponse { get; set; }
         public TipAdjustAuthResponse tipAdjustAuthResponse { get; set; }
         public AuthResponse authResponse { get; set; }
+        public CloseoutResponse closeoutResponse { get; set; }
         private Action<MerchantInfo> onDeviceReady;
         private Action onDeviceConnected;
         private Action onDeviceDisconnected;
@@ -68,6 +69,7 @@ namespace RICH_Connector.Clover
             base.OnDeviceDisconnected();
             Console.WriteLine("Disconnected");
             this.deviceConnected = false;
+            this.deviceReady = false;   
             //Disconnected
         }
 
@@ -147,5 +149,10 @@ namespace RICH_Connector.Clover
             this.authResponse = response;
         }
 
+        public override void OnCloseoutResponse(CloseoutResponse response)
+        {
+            base.OnCloseoutResponse(response);
+            this.closeoutResponse = response;
+        }
     }
 }

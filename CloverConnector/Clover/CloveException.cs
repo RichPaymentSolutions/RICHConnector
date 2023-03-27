@@ -27,8 +27,7 @@ namespace RICH_Connector.Clover
         public static CloverException OrderIsNotExisted = new CloverException("OrderIsNotExisted");
         public static CloverException TotalAmountIsGreaterThanOriginal = new CloverException("TotalAmountIsGreaterThanOriginal");
         public static CloverException PaymentIsNotExisted = new CloverException("PaymentIsNotExisted");
-
-
+        public static CloverException CloseoutTimeout = new CloverException("CloseoutTimeout");
 
     }
 }

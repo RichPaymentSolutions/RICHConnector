@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using com.clover.remotepay.sdk;
+using Microsoft.AspNetCore.Mvc;
 using RICH_Connector.API.Model;
 using RICH_Connector.Clover;
 using System;
@@ -41,5 +42,20 @@ namespace RICH_Connector.API.Controller
             };
         }
 
+        [HttpPost]
+        [Route("transactions/closeout")]
+        public IActionResult Closeout([FromBody] CloseoutRequest closeoutRequest)
+        {
+            CloverClient.Instance.CheckConnection();
+            var result = CloverClient.Instance.Closeout(closeoutRequest);
+            return new ObjectResult(new
+            {
+                status = true,
+                data = result
+            })
+            {
+                StatusCode = 200,
+            };
+        }
     }
 }

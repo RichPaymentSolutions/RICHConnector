@@ -52,6 +52,10 @@ namespace RICH_Connector.Clover
 
             if (cloverConnector != null)
             {
+                return;
+                // TODO: 2 lines below make connector is freezed. 
+                // If unplug Clover to PC
+                // Then try to call init api several times
                 cloverConnector.RemoveCloverConnectorListener(this.ccl);
                 cloverConnector.Dispose();
             }
@@ -385,6 +389,32 @@ namespace RICH_Connector.Clover
 
             ccl.tipAdjustAuthResponse = null;
             return response;
+        }
+
+        public CloseoutResponse Closeout(CloseoutRequest request)
+        {
+            this.cloverConnector.Closeout(request);
+            int timeCount = 1;
+            while (ccl.closeoutResponse == null && timeCount < WAITING_TIMEOUT)
+            {
+                Thread.Sleep(1000);
+                timeCount++;
+            }
+            var res = ccl.closeoutResponse;
+
+            if (res == null)
+            {
+                cloverConnector.ResetDevice();
+                throw CloverException.CloseoutTimeout;
+            }
+
+            if (!res.Success)
+            {
+                ccl.closeoutResponse = null;
+                throw new CloverException(res.Message);
+            }
+
+            return res;
         }
    
     }

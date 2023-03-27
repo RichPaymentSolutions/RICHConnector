@@ -35,9 +35,11 @@ namespace RICH_Connector.Printer
 </div>
 <br/>
 <div class=""hr""></div>
+<br/>
 <div class=""subcontent"">
 <h6>Customer: {customer_name}</h6>
 <h6>{payment_method}</h6>
+</div>
 <table>{ticket_items}</table>
 <br/>
 <div class=""hr"">
@@ -49,7 +51,7 @@ namespace RICH_Connector.Printer
 {cash_paid}
 {change_due}
 </table
-><div class=""tip-line""</div></div></body></html>";
+><div class=""tip-line""</div></body></html>";
         public string receiptTemplateWithTip = @"<!DOCTYPE html><html><head>{style}</head><body>
 <h5 class=""text-center"">{business_name}</h5>
 <div class=""text-center"">{business_phone}</div>
@@ -66,24 +68,22 @@ namespace RICH_Connector.Printer
         public string ticketTemplate = @"<tr><td colspan=""3""><span class=""width-400"">{staff}</span></td></tr>";
         public string ticketItemTemplate = @"<tr><td width=""100%""><span class=""text"">{service}</span></td><td><span>{quantity}</span></td><td class=""text-right""><span class=""no-wrap"">&nbsp &nbsp &nbsp {price}</span></td></tr>";
         //h5 14 - h6 13 - div 13
-        public string munbynStyle = @"<style>
-            body{padding: 0px 0px;margin:0;width:160px;font-family:Arial;}
-            h5{margin:4px 0;font-size:11px}
-            h6{font-size:10px; margin:11px 0} 
-            table{width:100%; margin: 0 auto; border-collapse: collapse;}
-            div,span,strong, b{font-size:9px;}
-            .text-center{text-align:center; width: 100%}
+        public static string munbynStyle = @"<style>
+            body{padding: 0px 0px;margin:0;width:270px;font-family:Arial;}
+            h5{margin:4px 0;font-size:14px}
+            h6{font-size:13px; margin:4px 0} 
+            table{width:80%; margin: 0 auto; border-collapse: collapse;}
+            div,span,strong{font-size:13px; font-weight: 400}
+            .text-center{text-align:center}
             .row{}
-            .width-400{width:160px;}
-            .hr{margin: 0 auto;overflow:hidden;width:90%;border:1px dashed #000000;}
+            .width-400{width:270px;}
+            .hr{margin: 0 auto;overflow:hidden;width:80%;border:1px dashed #000000;}
             .no-wrap{white-space: nowrap;}
             .content{width:100%;} 
             .line{border-top: 1px solid; padding-top: 10px} 
-            .subcontent{width:90%; margin: 0 auto;} 
-            .subcontent90{width:90%; margin: 0 auto;} 
+            .subcontent{width:80%; margin: 0 auto;} 
             .text-right{float:right; text-align:right}
-            .leftBit{margin-left:-4px}
-            .black-box{background:black; color:white}</style>";
+            .leftBit{margin-left:-4px}</style>";
         public string payrollTemplate = @"<!DOCTYPE html><html><head>{style}</head>
 <body>
 <div class=""subcontent""style={{}}>
