@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RICH_Connector.Printer
 {
     public class PrintUtils
     {
-        public PrintUtils () { }
+        public PrintUtils() { }
         public string style = @"<style>
             body{padding-bottom: 20px;margin:0;width:{page_width}px;font-family:Arial}
             h5{margin:4px 0;font-size:28px}
@@ -25,26 +26,31 @@ namespace RICH_Connector.Printer
         public string receiptTemplate = @"<!DOCTYPE html><html>
 <head>{style}</head>
 <body>
-<h5 class=""text-center"">{business_name}</h5>
-<div class=""text-center"">{business_phone}</div><br>
 <div class=""subcontent"">
+<h5 class=""text-center"">{business_name}</h5>
+<div class=""text-center"">{business_phone}</div>
+<div class=""text-center"">{business_address}</div>
+<br>
 <div class=""flex"">Receipt No:<strong>{receipt_no}</strong></div>
 <div class=""flex"">Date:<span>{created_date}</span></div>
 <div class=""flex"">Transaction No:<strong>{transaction_no}</strong></div>
 <div class=""flex"">Entry Method:<strong>{entry_method}</strong></div>
+<div class=""flex""><strong>{customer_point}</strong></div>
 </div>
 <br/>
 <div class=""hr""></div>
 <br/>
 <div class=""subcontent"">
 <h6>Customer: {customer_name}</h6>
-<h6>{payment_method}</h6>
+{payment_method}
 </div>
 <table>{ticket_items}</table>
 <br/>
 <div class=""hr"">
-</div><br/><table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr>
+</div><br/><table>
 <tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr>
+<tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>- {discount}</div></td></tr>
+{transaction_fee}
 <tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr
 ><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>{tip}</div></td></tr>
 <tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><strong>{total}</strong></td></tr>
@@ -53,20 +59,29 @@ namespace RICH_Connector.Printer
 </table
 ><div class=""tip-line""</div></body></html>";
         public string receiptTemplateWithTip = @"<!DOCTYPE html><html><head>{style}</head><body>
+<div class=""subcontent"">
 <h5 class=""text-center"">{business_name}</h5>
 <div class=""text-center"">{business_phone}</div>
-<div class=""subcontent"">
-<div>Receipt No:<strong>{receipt_no}</strong></div>
-<div>Date:<span>{created_date}</span></div>
-<div>Transaction No:<strong>{transaction_no}</strong></div></div>
-<br/>
-<div class=""hr"">
+<div class=""text-center"">{business_address}</div>
+<br>
+<div class=""flex"">Receipt No:<strong>{receipt_no}</strong></div>
+<div class=""flex"">Date:<span>{created_date}</span></div>
+<div class=""flex"">Transaction No:<strong>{transaction_no}</strong></div>
+<div class=""flex"">Entry Method:<strong>{entry_method}</strong></div>
+<div class=""flex""><strong>{customer_point}</strong></div>
 </div>
+<br/>
+<div class=""hr""></div>
+<br/>
 <div class=""subcontent"">
 <h6>Customer: {customer_name}</h6>
-<h6>{payment_method}</h6></div><table>{ticket_items}</table><br/><div class=""hr""></div><br/><table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr><tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr><tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr></table><br/><table><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>_________</div></td></tr></table><br/><table><tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><div>_________</div></td></tr></table><br/><br/><br/><br/><div>_______________________________________</div><div class=""text-center"">Signature</div><br/><div class=""text-center"">I agree to pay the above amount per the cardholder and/or merchant agreement</div></body></html>";
+<h6>{payment_method}</h6></div><table>{ticket_items}</table><br/><div class=""hr""></div><br/>
+<table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr>
+<tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr>
+{transaction_fee}
+<tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr></table><br/><table><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>_________</div></td></tr></table><br/><table><tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><div>_________</div></td></tr></table><br/><br/><br/><br/><div>_______________________________________</div><div class=""text-center"">Signature</div><br/><div class=""text-center"">I agree to pay the above amount per the cardholder and/or merchant agreement</div></body></html>";
         public string ticketTemplate = @"<tr><td colspan=""3""><span class=""width-400"">{staff}</span></td></tr>";
-        public string ticketItemTemplate = @"<tr><td width=""100%""><span class=""text"">{service}</span></td><td><span>{quantity}</span></td><td class=""text-right""><span class=""no-wrap"">&nbsp &nbsp &nbsp {price}</span></td></tr>";
+        public string ticketItemTemplate = @"<tr><td width=""100%""><div class=""text tdTicketItem""><span>{service}</span></td><td><span>{quantity}</span></td><td class=""text-right""><span class=""no-wrap"">&nbsp;&nbsp;&nbsp;{price}</span></div></td></tr>";
         //h5 14 - h6 13 - div 13
         public static string munbynStyle = @"<style>
             body{padding: 0px 0px;margin:0;width:270px;font-family:Arial;}
@@ -83,7 +98,9 @@ namespace RICH_Connector.Printer
             .line{border-top: 1px solid; padding-top: 10px} 
             .subcontent{width:80%; margin: 0 auto;} 
             .text-right{float:right; text-align:right}
-            .leftBit{margin-left:-4px}</style>";
+            .leftBit{margin-left:-4px}
+            .tdTicketItem{margin-left:10px}
+            .black-box{background: black; color: white}</style>";
         public string payrollTemplate = @"<!DOCTYPE html><html><head>{style}</head>
 <body>
 <div class=""subcontent""style={{}}>
@@ -103,11 +120,11 @@ namespace RICH_Connector.Printer
                     <br/>
                     <div>Ticket: {Ticket}</div>
                     <div>Service: ${Service}</div>
+                    <div>Supply Fee: ${SupplyFee}</div>
                     <div>Gratuity: ${RawGratuity} - {TipChargePercent}% = ${Gratuity}</div>
-                    <div>Total Revenue: ${TotalRevenue}</div>
                     <br/>
                 </div>
-                <div class=""subcontent"">
+                <div class="""">
                     <table>
                         <tr>
                             <td><h6>Day</h6></td>
@@ -126,8 +143,7 @@ namespace RICH_Connector.Printer
                     <div>Owner Only (O) = ${OwnerOnly}</div>
                     <div>Technician Only (E) = ${TechnicianOnly}</div>
                     <br/>
-           
-                    <h6>First ${HardSalary} or {Contracted}% = ${CommissionAmount}</h6>
+                    <h6>{staffPayout}</h6>          
                     <div>#Tips: {Tips}</div>
                     <div>Total Tip: ${TotalTip}</div>
                     <br/>
@@ -194,25 +210,22 @@ namespace RICH_Connector.Printer
             </html>";
         public string tmpReceiptTemplate = @"<!DOCTYPE html><html><head>{style}</head>
             <body>
-       
                 <div class=""subcontent"">
                     <h5 class=""text-center""><div class=""black-box"">{receipt_no}</div></h5>
-                    <h6 class=""text-center"">{business_name}</h6>
-                   
+                    <h6 class=""text-center"">{business_name}</h6>                  
                     <div class=""text-center"">{business_phone}</div>
-                    <div class=""text-center"">{created_date}</div>
-
                     <br/>
+                    <div>Date: {created_date}</div>         
                 </div>
-               
+                <div class=""hr""></div>
                 <table>
-                    {ticket_items}                
-                    <tr>
-                      
-                        <td><span><b>TOTAL</b></span></td>
-                        <td><span></span></td>
-                        <td class=""text-right""><span class=""no-wrap"">&nbsp &nbsp &nbsp {total}</span></td>
-                    </tr>
+                    {ticket_items}     
+                </table>
+                <div class=""hr""></div>
+                <table>
+                    <tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>- {discount}</div></td></tr>                            
+                    <tr><td><span class=""text"">Total</span></td><td class=""text-right""><div>{temp_total}</div></td></tr>
+                    
                 </table>
                 
                 <br/>   
@@ -230,7 +243,6 @@ namespace RICH_Connector.Printer
         public string tmpReceiptItemsTemplate = @"<tr><td colspan=""3""><span class=""width-400"">{staff}</span></td></tr>";
         public string tmpReceiptItemTemplate = @"
         <tr>
-            
             <td><span>{service}</span></td>
             <td><span>{price}</span></td>
         </tr>";
@@ -311,7 +323,8 @@ namespace RICH_Connector.Printer
         </div>
         <div class=""subcontent"">
             <h6>Customer: {customer_name}</h6>
-            <h6>{payment_method}</h6>
+            <h6>Staff: {staffs}</h6>
+            <h6>{payment_method}</h6>          
         </div>
         <div class=""hr""></div>
         
@@ -335,10 +348,10 @@ namespace RICH_Connector.Printer
             {
                 template = receiptTemplateWithTip;
             }
-            
+
             if (receipt.IsTmp)
             {
-                template = tmpReceiptTemplate;       
+                template = tmpReceiptTemplate;
             }
             string pageWidth = "50";
             string html = BuildReceipt(template, pageWidth, printer);
@@ -349,7 +362,7 @@ namespace RICH_Connector.Printer
             var bytes = converter.FromHtmlString(html, 50);
             File.WriteAllBytes(fileName, bytes);
 
-       
+
             return html;
         }
 
@@ -363,7 +376,31 @@ namespace RICH_Connector.Printer
         string BindingGeneralInfo(string html, Receipt receipt)
         {
             if (receipt == null) return html;
-
+            string paymentMethod = "";
+            if (receipt.PaymentMethod == "cash")
+            {
+                paymentMethod = "<h6>Cash</h6>";
+            }
+            else if (receipt.PaymentMethod == "credit")
+            {
+                paymentMethod = "<h6>Credit " + receipt.CardLastNumbers + "</h6>";
+            }
+            else if (receipt.PaymentMethod == "external credit card")
+            {
+                paymentMethod = "<h6>External Credit Card " + receipt.CardLastNumbers + "</h6>";
+            }
+            else if (receipt.PaymentMethod == "gift card")
+            {
+                foreach (string id in receipt.GiftCardIds)
+                {
+                    paymentMethod += "<h6>Gift Card " + id + "</h6>";
+                }      
+            }
+            String customerPoint = "";
+            if(receipt.CustomerPoint != null)
+            {
+                customerPoint = "Customer Point: "+receipt.CustomerPoint+ "pts";
+            }
             html = html
                 .Replace("{business_name}", receipt.BusinessName)
                 .Replace("{business_address}", receipt.BusinessAddress)
@@ -372,14 +409,27 @@ namespace RICH_Connector.Printer
                 .Replace("{receipt_no}", receipt.ReceiptNo)
                 .Replace("{created_date}", receipt.CreatedDate)
                 .Replace("{customer_name}", receipt.CustomerName)
-                .Replace("{payment_method}", receipt.PaymentMethod)
+                .Replace("{payment_method}", paymentMethod)
                 .Replace("{transaction_no}", receipt.TransactionNo)
                 .Replace("{entry_method}", receipt.EntryMethod)
+                .Replace("{customer_point}", customerPoint)
                 .Replace("{discount}", "$" + receipt.Discount)
                 .Replace("{sub_total}", "$" + receipt.SubTotal)
                 .Replace("{taxes}", "$" + receipt.Tax)
                 .Replace("{tip}", "$" + receipt.Tip)
-                .Replace("{total}", "$" + receipt.Total);
+                .Replace("{total}", "$" + receipt.Total)
+                .Replace("{temp_total}", "$" + String.Format("{0:N2}", float.Parse(receipt.SubTotal) - float.Parse(receipt.Discount)));
+            
+            if (receipt.TransactionFee != null && receipt.TransactionFee != "0")
+            {
+                html = html.Replace("{transaction_fee}",
+                    @"<tr><td><span class=""text"">Transaction Fee</span></td><td class=""text-right""><div>$"+receipt.TransactionFee+"</div></td></tr>");
+            }
+            else
+            {
+                html = html.Replace("{transaction_fee}", "");
+            }
+
             if (receipt.PaymentMethod == "Cash")
             {
                 html = html.Replace("{cash_paid}", @"<tr><td><span class=""text"">Cash Paid</span></td><td class=""text-right""><div>{a}</div></td></tr>")
@@ -413,8 +463,15 @@ namespace RICH_Connector.Printer
                             .Replace("{service}", item.ServiceName)
                             .Replace("{quantity}", "x" + item.ServiceQuantity)
                             .Replace("{price}", "$" + item.ServicePrice);
-
-                     
+                       
+                        var discount = item.Discount;
+                        if (discount != null && discount != "" && discount != "0" && discount != "0.00")
+                        {
+                            output += ticketItemTemplate
+                               .Replace("{service}", "")
+                               .Replace("{quantity}", "")
+                               .Replace("{price}", "Discount " + discount + "%");
+                        }
                     }
                 }
             }
@@ -505,13 +562,16 @@ namespace RICH_Connector.Printer
                                                 .Replace("{Service}", "$" + String.Format("{0:N2}", float.Parse(payrollStaff.Service)))
                                                 .Replace("{Tip}", "$" + String.Format("{0:N2}", float.Parse(payrollStaff.Tip)));
             }
+            String staffPayoutWithHardSalary = "First $" + payroll.HardSalary + " or " + payroll.Contracted + "% = $" + payroll.CommissionAmount;
+            String staffPayout = payroll.HardSalary != "0" ? staffPayoutWithHardSalary: payroll.Contracted +"% = $"+ payroll.CommissionAmount;
+
             return html.Replace("{Contracted}", payroll.Contracted)
                         .Replace("{StaffName}", payroll.StaffName)
                         .Replace("{StartDay}", payroll.StartDay)
                         .Replace("{EndDay}", payroll.EndDay)
                         .Replace("{Ticket}", payroll.Ticket)
                         .Replace("{Service}", String.Format("{0:N2}", float.Parse(payroll.Service)))
-                        .Replace("{TotalRevenue}", String.Format("{0:N2}", float.Parse(payroll.TotalRevenue)))
+                        .Replace("{SupplyFee}", String.Format("{0:N2}", float.Parse(payroll.SupplyFee)))
                         .Replace("{RawGratuity}", String.Format("{0:N2}", float.Parse(payroll.RawGratuity)))
                         .Replace("{TipChargePercent}", payroll.TipChargePercent)
                         .Replace("{Gratuity}", String.Format("{0:N2}", float.Parse(payroll.Gratuity)))
@@ -523,6 +583,7 @@ namespace RICH_Connector.Printer
                         .Replace("{TechnicianOnly}", String.Format("{0:N2}", float.Parse(payroll.TechnicianOnly)))
                         .Replace("{HardSalary}", String.Format("{0:N2}", float.Parse(payroll.HardSalary)))
                         .Replace("{PayrollStaffItems}", output)
+                        .Replace("{staffPayout}", staffPayout)
                         .Replace("{Tips}", payroll.Tips)
                         .Replace("{TotalTip}", String.Format("{0:N2}", float.Parse(payroll.TotalTip)))
                         .Replace("{TotalCheckAmount}", String.Format("{0:N2}", float.Parse(payroll.TotalCheckAmount)))
@@ -644,6 +705,7 @@ namespace RICH_Connector.Printer
                 .Replace("{receipt_no}", transaction.ReceiptNo)
                 .Replace("{created_date}", transaction.CreatedDate)
                 .Replace("{customer_name}", transaction.CustomerName)
+                .Replace("{staffs}", transaction.Staffs)
                 .Replace("{payment_method}", transaction.PaymentMethod)
                 .Replace("{transaction_no}", transaction.TransactionNo)             
                 .Replace("{tip}", "$" + transaction.Tip)

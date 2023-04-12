@@ -25,7 +25,7 @@ namespace RICH_Connector.API
             
             if (request.Printer == "munbyn")
             {
-                new PrinterClient().printHtmlFile(html);
+                new PrinterClient().printHtmlFile(html, 1);
             }
             return new ObjectResult(new
             {
@@ -45,7 +45,7 @@ namespace RICH_Connector.API
 
             if (request.Printer == "munbyn")
             {
-                new PrinterClient().printHtmlFile(html);
+                new PrinterClient().printHtmlFile(html, 1);
             }
             return new ObjectResult(new
             {
@@ -65,7 +65,7 @@ namespace RICH_Connector.API
 
             if (request.Printer == "munbyn")
             {
-                new PrinterClient().printHtmlFile(html);
+                new PrinterClient().printHtmlFile(html, 1);
             }
             return new ObjectResult(new
             {
@@ -81,11 +81,12 @@ namespace RICH_Connector.API
         [Route("total-report")]
         public IActionResult PrintTotalReport([FromBody] PrintReportRequest request)
         {
+            long milliseconds = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
             string html = new PrintUtils().PrepareTotalReport(request.Report, "munbyn");
-
+            milliseconds = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;         
             if (request.Printer == "munbyn")
             {
-                new PrinterClient().printHtmlFile(html);
+                new PrinterClient().printHtmlFile(html, 1);
             }
             return new ObjectResult(new
             {
@@ -105,7 +106,7 @@ namespace RICH_Connector.API
 
             if (request.Printer == "munbyn")
             {
-                new PrinterClient().printHtmlFile(html);
+                new PrinterClient().printHtmlFile(html, 1);
             }
             return new ObjectResult(new
             {
@@ -125,7 +126,7 @@ namespace RICH_Connector.API
 
             if (request.Printer == "munbyn")
             {
-                new PrinterClient().printHtmlFile(html);
+                new PrinterClient().printHtmlFile(html, 1);
             }
             return new ObjectResult(new
             {

@@ -13,9 +13,10 @@ namespace RICH_Connector.Printer
         public PrinterClient () { }
         static string fileName = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH\\print.png";
 
-        public void printHtmlFile(string html)
+        public void printHtmlFile(string html, int numberOfprints)
         {
-            Image i = Image.FromFile(fileName);
+            long milliseconds = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds; 
+            Image i = Image.FromFile(fileName);           
             SelectPdf.HtmlToPdf converter2 = new SelectPdf.HtmlToPdf();
             var height = i.Height;
             var width = i.Width;
@@ -37,9 +38,11 @@ namespace RICH_Connector.Printer
             converter2.Options.WebPageFixedSize = false;
             converter2.Options.AutoFitWidth = HtmlToPdfPageFitMode.AutoFit;
 
-
+            long milliseconds25 = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
+            Console.WriteLine(milliseconds25);
             SelectPdf.PdfDocument doc = converter2.ConvertHtmlString(html);
-
+            long milliseconds3 = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
+            Console.WriteLine(milliseconds3);
             doc.Save(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH\\print.pdf");
             doc.Close();
 
@@ -47,8 +50,13 @@ namespace RICH_Connector.Printer
            
             var printerName = "POS-80C";
             var printer2 = new PDFtoPrinterPrinter();
-            printer2.Print(new PrintingOptions(printerName, Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH\\print.pdf"));
-         
+            for(int index =0; index < numberOfprints; index++)
+            {
+                printer2.Print(new PrintingOptions(printerName, Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH\\print.pdf"));
+            }
+            
+            long milliseconds4 = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
+            Console.WriteLine(milliseconds4);
         }
     }
 }

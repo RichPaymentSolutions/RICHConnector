@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_C759E04B6BD64EDA9081711C6890F977"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D75F29A3B43B4CF28D4DE4B3E8DAF38F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -22,6 +28,12 @@
         "Entry"
         {
         "MsmKey" = "8:_E56E7B4CF6EE460485C9FC863C418016"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ED2DDC86687043598FE04E88CB0538F3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -132,6 +144,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C759E04B6BD64EDA9081711C6890F977"
+            {
+            "SourcePath" = "8:..\\CloverConnector\\Resources\\RICH_restart.vbs"
+            "TargetName" = "8:RICH_restart.vbs"
+            "Tag" = "8:"
+            "Folder" = "8:_142103278B6140178FB332AB44200F2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D75F29A3B43B4CF28D4DE4B3E8DAF38F"
             {
             "SourcePath" = "8:..\\CloverConnector\\Resources\\rich.ico"
@@ -156,6 +188,26 @@
             {
             "SourcePath" = "8:..\\CloverConnector\\bin\\Release\\netcoreapp3.1\\RICH Connector.exe"
             "TargetName" = "8:RICH Connector.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_142103278B6140178FB332AB44200F2D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED2DDC86687043598FE04E88CB0538F3"
+            {
+            "SourcePath" = "8:..\\CloverConnector\\Resources\\RICH_restart.bat"
+            "TargetName" = "8:RICH_restart.bat"
             "Tag" = "8:"
             "Folder" = "8:_142103278B6140178FB332AB44200F2D"
             "Condition" = "8:"
@@ -397,6 +449,20 @@
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_E56E7B4CF6EE460485C9FC863C418016"
+            "Folder" = "8:_0EA6A555C472451F957168BF2D2A6BE8"
+            "WorkingFolder" = "8:_142103278B6140178FB332AB44200F2D"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9DCDA6048EF04DF4910C84D63D35B19F"
+            {
+            "Name" = "8:RICH_restart.bat"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_ED2DDC86687043598FE04E88CB0538F3"
             "Folder" = "8:_0EA6A555C472451F957168BF2D2A6BE8"
             "WorkingFolder" = "8:_142103278B6140178FB332AB44200F2D"
             "Icon" = "8:"

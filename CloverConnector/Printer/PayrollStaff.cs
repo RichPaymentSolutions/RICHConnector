@@ -28,6 +28,7 @@ namespace RICH_Connector.Printer
         public string HardSalary { get; set; }
         public string TotalCheckAmount { get; set; }
         public string TotalCashAmount { get; set; }
+        public string SupplyFee { get; set; }
         public PayrollStaff() { }
     }
 }

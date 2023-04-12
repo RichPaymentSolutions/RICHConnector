@@ -12,6 +12,7 @@ namespace RICH_Connector.Printer
         public string ReceiptNo { get; set; }
         public string CreatedDate { get; set; }
         public string CustomerName { get; set; }
+        public string Staffs { get; set; }
         public string PaymentMethod { get; set; }
         public string TransactionNo { get; set; }
         public string Tip { get; set; }

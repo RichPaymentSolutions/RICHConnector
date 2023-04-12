@@ -15,15 +15,19 @@ namespace RICH_Connector.Printer
         public string CreatedDate { get; set; }
         public string CustomerName { get; set; }
         public string PaymentMethod { get; set; }
+        public string CardLastNumbers { get; set; }
+        public List<string> GiftCardIds { get; set; }
         public string TransactionNo { get; set; }
         public string EntryMethod { get; set; }
         public string Discount { get; set; }
         public string SubTotal { get; set; }
         public string Tax { get; set; }
         public string Tip { get; set; }
+        public string TransactionFee { get; set; }
         public string Total { get; set; }
         public string CashPaid { get; set; }
         public string ChangeDue { get; set; }
+        public string CustomerPoint { get; set; }
         public List<ReceiptStaff> Staffs { get; set; }
 
         public Receipt() { }
