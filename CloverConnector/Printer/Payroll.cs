@@ -7,7 +7,6 @@ namespace RICH_Connector.Printer
     {
         public string PageWidth { get; set; }
         public string BusinessName { get; set; }
-        public string BusinessAddress { get; set; }
         public string BusinessState { get; set; }
         public string BusinessPhone { get; set; }
         public List<PayrollItem> Staffs { get; set; }

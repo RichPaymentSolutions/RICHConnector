@@ -29,7 +29,8 @@ namespace RICH_Connector.Printer
 <div class=""subcontent"">
 <h5 class=""text-center"">{business_name}</h5>
 <div class=""text-center"">{business_phone}</div>
-<div class=""text-center"">{business_address}</div>
+<div class=""text-center"">{business_address1}</div>
+<div class=""text-center"">{business_address2}</div>
 <br>
 <div class=""flex"">Receipt No:<strong>{receipt_no}</strong></div>
 <div class=""flex"">Date:<span>{created_date}</span></div>
@@ -62,7 +63,8 @@ namespace RICH_Connector.Printer
 <div class=""subcontent"">
 <h5 class=""text-center"">{business_name}</h5>
 <div class=""text-center"">{business_phone}</div>
-<div class=""text-center"">{business_address}</div>
+<div class=""text-center"">{business_address1}</div>
+<div class=""text-center"">{business_address2}</div>
 <br>
 <div class=""flex"">Receipt No:<strong>{receipt_no}</strong></div>
 <div class=""flex"">Date:<span>{created_date}</span></div>
@@ -214,14 +216,20 @@ namespace RICH_Connector.Printer
                     <h5 class=""text-center""><div class=""black-box"">{receipt_no}</div></h5>
                     <h6 class=""text-center"">{business_name}</h6>                  
                     <div class=""text-center"">{business_phone}</div>
+                    <div class=""text-center"">{business_address1}</div>
+                    <div class=""text-center"">{business_address2}</div>
                     <br/>
                     <div>Date: {created_date}</div>         
                 </div>
+                <br>
                 <div class=""hr""></div>
+                <br>
                 <table>
                     {ticket_items}     
                 </table>
+                <br>
                 <div class=""hr""></div>
+                <br>
                 <table>
                     <tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>- {discount}</div></td></tr>                            
                     <tr><td><span class=""text"">Total</span></td><td class=""text-right""><div>{temp_total}</div></td></tr>
@@ -401,9 +409,16 @@ namespace RICH_Connector.Printer
             {
                 customerPoint = "Customer Point: "+receipt.CustomerPoint+ "pts";
             }
+
+            String address2 = receipt.BusinessAddress.Address2 != null ? receipt.BusinessAddress.Address2 : "";
+
+            String businessAddress1 = receipt.BusinessAddress.Address + " " + address2;
+            String businessAddress2 = receipt.BusinessAddress.City + ", " + receipt.BusinessAddress.State + ", " + receipt.BusinessAddress.ZipCode;
+
             html = html
                 .Replace("{business_name}", receipt.BusinessName)
-                .Replace("{business_address}", receipt.BusinessAddress)
+                .Replace("{business_address1}", businessAddress1)
+                .Replace("{business_address2}", businessAddress2)
                 .Replace("{business_state}", receipt.BusinessState)
                 .Replace("{business_phone}", receipt.BusinessPhone)
                 .Replace("{receipt_no}", receipt.ReceiptNo)
@@ -699,7 +714,6 @@ namespace RICH_Connector.Printer
 
             return html
                 .Replace("{business_name}", transaction.BusinessName)
-                .Replace("{business_address}", transaction.BusinessAddress)
                 .Replace("{business_state}", transaction.BusinessState)
                 .Replace("{business_phone}", transaction.BusinessPhone)
                 .Replace("{receipt_no}", transaction.ReceiptNo)
