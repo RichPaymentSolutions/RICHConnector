@@ -57,7 +57,13 @@ namespace RICH_Connector.Printer
 <tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><strong>{total}</strong></td></tr>
 {cash_paid}
 {change_due}
-</table
+</table>
+<br/>
+<div class=""hr""></div>
+<br/>
+<table>
+{partial_payments}
+</table>
 ><div class=""tip-line""</div></body></html>";
         public string receiptTemplateWithTip = @"<!DOCTYPE html><html><head>{style}</head><body>
 <div class=""subcontent"">
@@ -81,7 +87,9 @@ namespace RICH_Connector.Printer
 <table><tr><td><span class=""text"">Discount</span></td><td class=""text-right""><div>{discount}</div></td></tr>
 <tr><td><span class=""text"">Subtotal</span></td><td class=""text-right""><div>{sub_total}</div></td></tr>
 {transaction_fee}
-<tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr></table><br/><table><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>_________</div></td></tr></table><br/><table><tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><div>_________</div></td></tr></table><br/><br/><br/><br/><div>_______________________________________</div><div class=""text-center"">Signature</div><br/><div class=""text-center"">I agree to pay the above amount per the cardholder and/or merchant agreement</div></body></html>";
+<tr><td><span class=""text"">Taxes</span></td><td class=""text-right""><div>{taxes}</div></td></tr></table><br/><table><tr><td><span class=""text"">Tip</span></td><td class=""text-right""><div>_________</div></td></tr></table><br/><table><tr><td><strong class=""text"">Total</strong></td><td class=""text-right""><div>_________</div></td></tr></table>
+<br/><div class=""hr""></div><br/>
+<table>{partial_payments}</table><br/><br/><br/><br/><div>_______________________________________</div><div class=""text-center"">Signature</div><br/><div class=""text-center"">I agree to pay the above amount per the cardholder and/or merchant agreement</div></body></html>";
         public string ticketTemplate = @"<tr><td colspan=""3""><span class=""width-400"">{staff}</span></td></tr>";
         public string ticketItemTemplate = @"<tr><td width=""100%""><div class=""text tdTicketItem""><span>{service}</span></td><td><span>{quantity}</span></td><td class=""text-right""><span class=""no-wrap"">&nbsp;&nbsp;&nbsp;{price}</span></div></td></tr>";
         //h5 14 - h6 13 - div 13
@@ -239,6 +247,13 @@ namespace RICH_Connector.Printer
                 <br/>   
               
                 <div class=""text-center"">Tip Amount: $_________</div>
+                <br/>
+                <div class=""hr""></div>
+                <br/>     
+                <table>
+                    {partial_payments}
+                </table>
+              
                 <br/>           
                 <div class=""subcontent"">
                     <div class=""text-center"">
@@ -385,7 +400,11 @@ namespace RICH_Connector.Printer
         {
             if (receipt == null) return html;
             string paymentMethod = "";
-            if (receipt.PaymentMethod == "cash")
+            if (receipt.IsPartialPayment == true)
+            {
+                paymentMethod = "";
+            }
+            else if (receipt.PaymentMethod == "cash")
             {
                 paymentMethod = "<h6>Cash</h6>";
             }
@@ -445,7 +464,7 @@ namespace RICH_Connector.Printer
                 html = html.Replace("{transaction_fee}", "");
             }
 
-            if (receipt.PaymentMethod == "Cash")
+            if (receipt.PaymentMethod == "cash" && !receipt.IsPartialPayment)
             {
                 html = html.Replace("{cash_paid}", @"<tr><td><span class=""text"">Cash Paid</span></td><td class=""text-right""><div>{a}</div></td></tr>")
                     .Replace("{a}", "$" + receipt.CashPaid)
@@ -455,6 +474,37 @@ namespace RICH_Connector.Printer
             {
                 html = html.Replace("{cash_paid}", "")
                             .Replace("{change_due}", "");
+            }
+
+            if (receipt.IsPartialPayment)
+            {
+                string partialPayments = @"<tr><td><div class=""flex""><strong>Partial payments:</strong></div></td><td class=""text-right""><div></div></td></tr>";
+                foreach (PaymentItem paymentItem in receipt.Payments)
+                {
+                    string partialPaymentMethod = "";
+                    if (paymentItem.PaymentMethod == "cash")
+                    {
+                        partialPaymentMethod = "<h6 class=\"text\">Cash</h6>";
+                    }
+                    else if (paymentItem.PaymentMethod == "credit")
+                    {
+                        partialPaymentMethod = "<h6 class=\"text\">Credit " + receipt.CardLastNumbers + "</h6>";
+                    }
+                    else if (paymentItem.PaymentMethod == "external credit")
+                    {
+                        partialPaymentMethod = "<h6 class=\"text\">External Credit Card " + receipt.CardLastNumbers + "</h6>";
+                    }
+                    else if (paymentItem.PaymentMethod == "gift card")
+                    {
+                        foreach (string id in receipt.GiftCardIds)
+                        {
+                            partialPaymentMethod += "<h6 class=\"text\">Gift Card " + id + "</h6>";
+                        }
+                    }
+
+                    partialPayments = partialPayments + @"<tr><td>{partialPaymentMethod}</td><td class=""text-right""><div>{total}</div></td></tr>".Replace("{partialPaymentMethod}", partialPaymentMethod).Replace("{total}", "$" + paymentItem.Total);
+                }
+                html = html.Replace("{partial_payments}", partialPayments);
             }
 
             return html;
