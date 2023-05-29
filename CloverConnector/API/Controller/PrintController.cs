@@ -16,7 +16,7 @@ namespace RICH_Connector.API
 {
     [Route("print")]
     public class PrintController
-    {
+    {   
         [HttpPost]
         [Route("payroll")]
         public IActionResult PrintPayrollAsync([FromBody] PrintPayrollRequest request)

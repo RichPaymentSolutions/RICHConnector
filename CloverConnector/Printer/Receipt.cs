@@ -28,6 +28,7 @@ namespace RICH_Connector.Printer
         public string CashPaid { get; set; }
         public string ChangeDue { get; set; }
         public string CustomerPoint { get; set; }
+        public int NumberOfSheet { get; set; }
         public bool IsPartialPayment { get; set; }
         public List<PaymentItem> Payments { get; set; }
         public List<ReceiptStaff> Staffs { get; set; }

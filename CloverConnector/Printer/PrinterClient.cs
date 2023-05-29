@@ -4,6 +4,7 @@ using SelectPdf;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Text;
 
 namespace RICH_Connector.Printer
@@ -58,5 +59,18 @@ namespace RICH_Connector.Printer
             long milliseconds4 = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
             Console.WriteLine(milliseconds4);
         }
+
+        public void printPdf(int numberOfprints)
+        {
+            var printerName = "POS-80C";
+            var printer2 = new PDFtoPrinterPrinter();
+            for (int index = 0; index < numberOfprints; index++)
+            {
+                printer2.Print(new PrintingOptions(printerName, Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH\\print.pdf"));
+            }
+
+        }
+
+
     }
 }
