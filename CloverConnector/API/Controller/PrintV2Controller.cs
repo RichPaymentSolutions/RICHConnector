@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using RICH_Connector.API.Model;
+using RICH_Connector.Helper;
 using RICH_Connector.Printer;
 using System;
 using System.Collections.Generic;
@@ -12,6 +15,7 @@ namespace RICH_Connector.API.Controller
     public class PrintV2Controller : ControllerBase
     {
         [HttpPost]
+        [Route("")]
         public async Task<IActionResult> printPdf()
         {
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\RICH\\print.pdf";
@@ -34,6 +38,27 @@ namespace RICH_Connector.API.Controller
             {
                 return BadRequest("File is not present / file is empty.");
             }
+        }
+
+        [HttpPost]
+        [Route("print-html")]
+        public async Task<IActionResult> printHTMl([FromBody] HtmlModel model)
+        {
+            if (model != null) {
+                var html = model.HtmlContent;
+                if (!string.IsNullOrEmpty(html) && HttpHelper.ContainsXHTML(html))
+                {
+                    // Make sure to use a unique name for each uploaded file
+                    new PrinterClient().printHtmlFile(html, 1);
+
+                    return Ok(new { status = true, data = "Success" });
+                }
+                else
+                {
+                    return BadRequest("File is not DOM Html or not empty.");
+                }
+            }
+            return BadRequest("Html is null.");
         }
     }
 }

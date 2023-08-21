@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using AutoUpdaterDotNET;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,8 +27,9 @@ namespace Connector
         public MainWindow()
         {
             InitializeComponent();
-        }
 
+          
+        }
 
 
     }

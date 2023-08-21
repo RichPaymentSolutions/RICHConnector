@@ -10,6 +10,10 @@
 	<StartupObject>Connector.App</StartupObject>
 	<Platforms>x64</Platforms>
 	<PlatformTarget>x64</PlatformTarget>
+	<AssemblyVersion>1.1.8.0</AssemblyVersion>
+	<AssemblyName>RICHConnector</AssemblyName>
+	<FileVersion>1.1.8.0</FileVersion>
+	<Version>1.1.8</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+	  <PackageReference Include="Autoupdater.NET.Official" Version="1.8.3" />
 	  <PackageReference Include="Clover.RemotePayWindows" Version="4.0.6" />
 	  <PackageReference Include="CoreHtmlToImage" Version="1.0.6" />
+	  <PackageReference Include="EscPos" Version="1.2.3" />
 	  <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.6" />
 	  <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
@@ -45,10 +51,10 @@
 	  <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="3.1.6" />
 	  <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.6" />
 	  <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.6" />
-	  <PackageReference Include="PDFtoPrinter" Version="1.4.4" />
+	  <PackageReference Include="PDFtoPrinter" Version="1.5.0" />
 	  <PackageReference Include="POSForDotNet.SDK" Version="1.14.1" />
-	  <PackageReference Include="Select.HtmlToPdf.NetCore" Version="22.2.0" />
 	  <PackageReference Include="SerialPortStream" Version="2.4.1" />
+	  <PackageReference Include="StarMicronics.StarIODeviceSetting.Desktop" Version="1.0.0" />
 	  <PackageReference Include="System.IO.Ports" Version="7.0.0" />
   </ItemGroup>
 
@@ -78,10 +84,49 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="lib\p-html-2\PrintHtml.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\ca-bundle.crt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\libeay32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\libgcc_s_dw2-1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\libstdc++-6.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\libwinpthread-1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\PrintHtml.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\QtCore4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\QtGui4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\QtNetwork4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\QtWebKit4.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="lib\p-html\ssleay32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\rich.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\rich.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\update.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -91,16 +91,16 @@ namespace RICH_Connector.Printer
             body{padding: 0px 0px;margin:0;width:270px;font-family:Arial;}
             h5{margin:4px 0;font-size:14px}
             h6{font-size:13px; margin:4px 0} 
-            table{width:80%; margin: 0 auto; border-collapse: collapse;}
+            table{width:90%; margin: 0 auto; border-collapse: collapse;}
             div,span,strong{font-size:13px; font-weight: 400}
             .text-center{text-align:center}
             .row{}
             .width-400{width:270px;}
-            .hr{margin: 0 auto;overflow:hidden;width:80%;border:1px dashed #000000;}
+            .hr{margin: 0 auto;overflow:hidden;width:90%;border:1px dashed #000000;}
             .no-wrap{white-space: nowrap;}
             .content{width:100%;} 
             .line{border-top: 1px solid; padding-top: 10px} 
-            .subcontent{width:80%; margin: 0 auto;} 
+            .subcontent{width:90%; margin: 0 auto;} 
             .text-right{float:right; text-align:right}
             .leftBit{margin-left:-4px}
             .tdTicketItem{margin-left:10px}
@@ -369,9 +369,9 @@ namespace RICH_Connector.Printer
             html = BindingGeneralInfo(html, receipt);
             html = BindingTicket(html, receipt);
 
-            var converter = new CoreHtmlToImage.HtmlConverter() { };
-            var bytes = converter.FromHtmlString(html, 50);
-            File.WriteAllBytes(fileName, bytes);
+            //var converter = new CoreHtmlToImage.HtmlConverter() { };
+            //var bytes = converter.FromHtmlString(html, 50);
+            //File.WriteAllBytes(fileName, bytes);
 
 
             return html;
@@ -602,10 +602,10 @@ namespace RICH_Connector.Printer
             string html = BuildPayroll(template, pageWidth, printer);
             html = BindingPayroll(html, payroll);
 
-            var converter = new CoreHtmlToImage.HtmlConverter();
-            var bytes = converter.FromHtmlString(html, 160);
+            //var converter = new CoreHtmlToImage.HtmlConverter();
+            //var bytes = converter.FromHtmlString(html, 160);
            
-            File.WriteAllBytes(fileName, bytes);
+            //File.WriteAllBytes(fileName, bytes);
             
             return html;
         }
@@ -659,10 +659,10 @@ namespace RICH_Connector.Printer
 
             html = BindingPayrollStaff(html, payroll);
 
-            var converter = new CoreHtmlToImage.HtmlConverter() { };
+            //var converter = new CoreHtmlToImage.HtmlConverter() { };
 
-            var bytes = converter.FromHtmlString(html, 160);
-            File.WriteAllBytes(fileName, bytes);
+            //var bytes = converter.FromHtmlString(html, 160);
+            //File.WriteAllBytes(fileName, bytes);
            
             return html;
         }
@@ -695,12 +695,12 @@ namespace RICH_Connector.Printer
 
             html = BindingTotalReport(html, report);
 
-            var converter = new CoreHtmlToImage.HtmlConverter() { };
+            //var converter = new CoreHtmlToImage.HtmlConverter() { };
 
-            var bytes = converter.FromHtmlString(html, 160);
-            //var bytes = PdfSharpConvert(html);
+            //var bytes = converter.FromHtmlString(html, 160);
+            ////var bytes = PdfSharpConvert(html);
 
-            File.WriteAllBytes(fileName, bytes);
+            //File.WriteAllBytes(fileName, bytes);
 
             return html;
         }
@@ -735,12 +735,12 @@ namespace RICH_Connector.Printer
 
             html = BindingIncomeReport(html, report);
 
-            var converter = new CoreHtmlToImage.HtmlConverter() { };
+            //var converter = new CoreHtmlToImage.HtmlConverter() { };
 
-            var bytes = converter.FromHtmlString(html, 160);
-            //var bytes = PdfSharpConvert(html);
+            //var bytes = converter.FromHtmlString(html, 160);
+            ////var bytes = PdfSharpConvert(html);
 
-            File.WriteAllBytes(fileName, bytes);
+            //File.WriteAllBytes(fileName, bytes);
 
             return html;
         }
@@ -781,10 +781,10 @@ namespace RICH_Connector.Printer
             string html = BuildPayroll(template, pageWidth, printer);
             html = BindingTransaction(html, transaction);
 
-            var converter = new CoreHtmlToImage.HtmlConverter() { };
-            var bytes = converter.FromHtmlString(html, 160);
+            //var converter = new CoreHtmlToImage.HtmlConverter() { };
+            //var bytes = converter.FromHtmlString(html, 160);
            
-            File.WriteAllBytes(fileName, bytes);
+            //File.WriteAllBytes(fileName, bytes);
             return html;
         }
     }

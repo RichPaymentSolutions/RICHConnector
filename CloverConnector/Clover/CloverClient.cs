@@ -1,4 +1,6 @@
-﻿using com.clover.remotepay.sdk;
+﻿using com.clover.remote.order;
+using com.clover.remote.order.operation;
+using com.clover.remotepay.sdk;
 using com.clover.remotepay.transport;
 using com.clover.sdk.v3.payments;
 using RICH_Connector.API.Model;
@@ -13,6 +15,7 @@ namespace RICH_Connector.Clover
     public sealed class CloverClient
     {
         private static int WAITING_TIMEOUT = 120;
+        private static string MESSAGE_NOT_CONNECTED_CLOVER = "The Clover device is not connected.";
         private CloverClient()
         {
 
@@ -71,11 +74,20 @@ namespace RICH_Connector.Clover
 
         public void ShowMessage(String msg)
         {
-            cloverConnector.ShowMessage(msg);
+            if (this.cloverConnector == null)
+            {
+                throw new Exception(MESSAGE_NOT_CONNECTED_CLOVER);
+            }
+            this.cloverConnector.ShowMessage(msg);
         }
 
         public void Reset()
         {
+            if (this.deviceId == null || this.deviceId == "")
+            {
+                Console.WriteLine("Init failed. DeviceId is empty");
+                throw new Exception(MESSAGE_NOT_CONNECTED_CLOVER);
+            }
             this.cloverConnector.Dispose();
             this.ccl = null;
             this.Init(this.deviceId, this.deviceName);
@@ -416,7 +428,52 @@ namespace RICH_Connector.Clover
 
             return res;
         }
-   
+
+        public void OrderUpdate(DisplayOrder order)
+        {
+            if (this.cloverConnector == null)
+            {
+                throw new Exception(MESSAGE_NOT_CONNECTED_CLOVER);
+            }
+            else if(order == null)
+            {
+                throw new Exception("Order is null");
+            }
+
+            this.cloverConnector.ShowDisplayOrder(order);
+        }
+
+        public void OrderRemove(DisplayOrder order)
+        {
+            if (this.cloverConnector == null)
+            {
+                throw new Exception(MESSAGE_NOT_CONNECTED_CLOVER);
+            }
+            else if(order == null)
+            {
+                throw new Exception("Order is null");
+            }
+
+            this.cloverConnector.RemoveDisplayOrder(order);
+        }
+
+        public void ShowWelcomeScreen()
+        {
+            if (this.cloverConnector == null)
+            {
+                throw new Exception(MESSAGE_NOT_CONNECTED_CLOVER);
+            }
+            this.cloverConnector.ShowWelcomeScreen();
+        }
+
+        public void ShowThankyouScreen()
+        {
+            if (this.cloverConnector == null)
+            {
+                throw new Exception(MESSAGE_NOT_CONNECTED_CLOVER);
+            }
+            this.cloverConnector.ShowThankYouScreen();
+        }
     }
 
 }

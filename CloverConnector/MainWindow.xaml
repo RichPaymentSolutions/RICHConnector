@@ -12,6 +12,5 @@
             <ColumnDefinition Width="61*"/>
             <ColumnDefinition Width="89*"/>
         </Grid.ColumnDefinitions>
-
     </Grid>
 </Window>
