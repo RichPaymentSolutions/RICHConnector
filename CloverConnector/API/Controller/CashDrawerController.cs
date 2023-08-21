@@ -6,26 +6,26 @@ using System.Drawing.Printing;
 using System.Text;
 
 namespace RICH_Connector.API
+{
+    public class CashDrawerController
     {
-        public class CashDrawerController
+
+        [HttpPost]
+        [Route("cash-drawer")]
+        public IActionResult OpenCashDrawer()
         {
-            
-            [HttpPost]
-            [Route("cash-drawer")]
-            public IActionResult OpenCashDrawer()
-            {
             CloverClient.Instance.OpenCashDrawer("test");
-            
+
 
             return new ObjectResult(new
-                {
-                    status = true,
+            {
+                status = true,
 
-                })
-                {
-                    StatusCode = 200,
-                };
-            }
+            })
+            {
+                StatusCode = 200,
+            };
         }
     }
+}
 
